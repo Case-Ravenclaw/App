@@ -40,7 +40,7 @@
             <form>
                 <div class="form-group">
                     <label for="locationSearch">Near</label>
-                    <input type="text" class="form-control" id="locationSearch" placeholder="Chicago">
+                    <input type="text" class="form-control" id="locationSearch" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
                 </div>
                 <div class="form-group">
                     <label for="radiusSearch">Radius (miles)</label>
@@ -64,26 +64,30 @@
             <form>
                 <div class="form-group">
                     <label for="locationExplore">Near</label>
-                    <input type="email" class="form-control" id="locationExplore" placeholder="Chicago">
+                    <input type="email" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
                 </div>
                 <div class="form-group">
                     <label for="sectionExplore">Section</label>
                     <select class="form-control" id="sectionExplore">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option data="food">Food</option>
+                        <option data="drinks">Drinks</option>
+                        <option data="coffee">Coffee</option>
+                        <option data="shops">Shops</option>
+                        <option data="arts">Art</option>
+                        <option data="outdoors">Outdoors</option>
+                        <option data="sights">Sights</option>
+                        <option data="topPicks">Top Picks</option>
+                        <option data="trending">Trending</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="radiusExplore">Radius</label>
+                    <label for="radiusExplore">Radius (miles)</label>
                     <select class="form-control" id="radiusExplore">
                         <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
                         <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
                     </select>
                 </div>
                 <div class="form-check">
@@ -98,4 +102,5 @@
     </div>
 </body>
 
+<script type="text/javascript" src="assets/js/app.js"></script>
 </html>
