@@ -39,21 +39,21 @@
             <h5>Find a specific place</h5>
             <form>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Near</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    <label for="locationSearch">Near</label>
+                    <input type="text" class="form-control" id="locationSearch" placeholder="Chicago">
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Radius</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <label for="radiusSearch">Radius (miles)</label>
+                    <select class="form-control" id="radiusSearch">
                         <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
                         <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
                     </select>
                 </div>
             </form>
-            <button type="submitSearch" class="btn btn-primary">Submit</button>
+            <button id="submitSearch" type="submitSearch" class="btn btn-primary">Submit</button>
         </div>
 
         <p class="divider"><span>OR</span></p>
@@ -63,12 +63,12 @@
             <h5>Look for places</h5>
             <form>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Near</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    <label for="locationExplore">Near</label>
+                    <input type="email" class="form-control" id="locationExplore" placeholder="Chicago">
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Section</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <label for="sectionExplore">Section</label>
+                    <select class="form-control" id="sectionExplore">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -77,8 +77,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Radius</label>
-                    <select class="form-control" id="exampleFormControlSelect2">
+                    <label for="radiusExplore">Radius</label>
+                    <select class="form-control" id="radiusExplore">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -87,13 +87,13 @@
                     </select>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
+                    <input class="form-check-input" type="checkbox" value="" id="openExplore">
+                    <label class="form-check-label" for="openExplore">
                         Open Now
                     </label>
                 </div>
             </form>
-            <button type="submitExplore" class="btn btn-primary">Submit</button>
+            <button id="submitExplore" type="submitExplore" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </body>
