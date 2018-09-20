@@ -1,9 +1,17 @@
 //Foursquare SEARCH endpoint
 var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
 var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
-var curLon = ''
-var curLat = ''
 
+
+var getSearch = function (queryURL) {
+    $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+        .then(function (response) {
+            console.log(response.response.venues)
+        });
+}
 
 function getCurrentLocation() {
     //Get current location (default if leaving location blank)
@@ -17,8 +25,27 @@ function getCurrentLocation() {
     getLocation()
 
     function showPosition(position) {
-        curLat = position.coords.latitude
-        curLon = position.coords.longitude
+        var curLat = position.coords.latitude
+        var curLon = position.coords.longitude
+        var latLon = curLon + ',' + curLat
+        var near = $("#locationSearch").val()
+        var userRadiusMi = $("#radiusSearch").val()
+        var userRadiusM = userRadiusMi / 0.00062137
+        var version = 20180918
+        var query = $("#query").val()
+
+
+        if (!$("#locationSearch").val()) {
+            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10"
+            alert("Enter a location")
+        } else if ($("#locationSearch").val()) {
+            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+            getSearch(queryURL)
+        } else {
+            console.log("Broken")
+        }
+
+        getSearch()
 
         console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude)
     }
@@ -26,35 +53,8 @@ function getCurrentLocation() {
 
 $("#submitSearch").on("click", function () {
 
-    //Can use Latitude Longitude or Near One is requireed
-    var latLon = curLon + ',' + curLat
-    var near = $("#locationSearch").val()
-    var userRadiusMi = $("#radiusSearch").val()
-    var userRadiusM = userRadiusMi / 0.00062137
-    var version = 20180918
-    var query = $("#query").val()
-
-    var getSearch = function (queryURL) {
-        $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-            .then(function (response) {
-                console.log(response.response.venues)
-            });
-    }
-
-    if (!$("#locationSearch").val()) {
-        // getCurrentLocation()
-        // var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10"
-        // getSearch(queryURL)
-        alert("Enter a location")
-    } else if ($("#locationSearch").val()) {
-        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
-        getSearch(queryURL)
-    } else {
-        console.log("Broken")
-    }
+    getCurrentLocation()
+    
 })
 
 
