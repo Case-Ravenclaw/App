@@ -5,12 +5,12 @@ var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
 
 var getSearch = function (queryURL) {
     $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
+        url: queryURL,
+        method: "GET"
+    })
         .then(function (response) {
-            console.log(response.response.venues)
-        });
+        console.log(response.response.venues)
+    });
 }
 
 function getCurrentLocation() {
@@ -27,7 +27,8 @@ function getCurrentLocation() {
     function showPosition(position) {
         var curLat = position.coords.latitude
         var curLon = position.coords.longitude
-        var latLon = curLon + ',' + curLat
+        //need to trim to one decimal
+        var latLon = Math.round( curLat * 10 ) / 10 + ',' + Math.round( curLon * 10 ) / 10
         var near = $("#locationSearch").val()
         var userRadiusMi = $("#radiusSearch").val()
         var userRadiusM = userRadiusMi / 0.00062137
@@ -36,18 +37,15 @@ function getCurrentLocation() {
 
 
         if (!$("#locationSearch").val()) {
-            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10"
-            alert("Enter a location")
+            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+            console.log(queryURL)
+            getSearch(queryURL)
         } else if ($("#locationSearch").val()) {
             var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
             getSearch(queryURL)
         } else {
             console.log("Broken")
         }
-
-        getSearch()
-
-        console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude)
     }
 }
 
