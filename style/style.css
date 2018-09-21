@@ -3,8 +3,8 @@
 }
 
 :root
-{   --div-brd-color: black;
-    --div-brd-radius: 5px;
+{   /* --div-brd-color: blue; */
+    --div-brd-radius: 2px;
     --head-bg-color: blue;
     --head-brd-color: darkblue;
     --head-text: white;
@@ -19,28 +19,35 @@ header
     padding: 20px;
     text-align: center;
 }
+#main-content
+{   display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
 
 .foodie-section, .map-section
 {   background: rgba(0, 255, 0, 0.5);
-    float: left;
-    margin-right: 10px;
-    margin-left: 10px;
+    min-width: 400px;
     padding: 10px;
-    width: 45%;
+    width: 48%;
 }
 
-.food-site
-{   border: 1px solid black;
-    height: 100px;
+.zomato-site
+{   border: 1px solid var(--head-bg-color);
+    border-radius: var(--div-brd-radius);
     margin-bottom: 10px;
-    padding: 10px;
-    width: 100%
+    padding: 0px;
 }
 
 .div-header
 {   background: var(--head-bg-color);
     color: var(--head-text);
     padding: 10px;
+}
+
+.div-text
+{   padding: 10px;
 }
 
 .button
@@ -62,7 +69,7 @@ header
 /*                                  */
 
 .input-div
-{   border: 1px solid var(--div-brd-color);
+{   border: 1px solid var(--head-bg-color);
     border-radius: var(--div-brd-radius);
     margin-bottom: 10px;
 }

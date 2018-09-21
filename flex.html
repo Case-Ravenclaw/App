@@ -15,11 +15,154 @@
         <!--link href="style/reset.css"
               rel="stylesheet"
               type="text/css"-->
-        <link href="style/style.css"
-              rel="stylesheet"
-              type="text/css">
         <style>
-        </style>
+
+*
+{   box-sizing: border-box;
+}
+
+:root
+{   --div-brd-color: black;
+    --div-brd-radius: 5px;
+    --head-bg-color: blue;
+    --head-brd-color: darkblue;
+    --head-text: white;
+}
+
+header
+{   background: var(--head-bg-color);
+    border: 2px solid var(--head-brd-color);
+    border-radius: 5px;
+    color: var(--head-text);
+    font-size: 36px;
+    padding: 20px;
+    text-align: center;
+}
+#main-content
+{   display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.section-wrapper
+{   background: rgba(0, 255, 0, 0.5);
+    /* float: left; */
+    /* margin-right: 10px;
+    margin-left: 10px;
+    max-width: 40%;
+    min-width: 40%; */
+    padding: 10px;
+    /* width: 40%; */
+}
+
+
+.foodie-section, .map-section
+{   background: rgba(0, 255, 0, 0.5);
+    /* float: left; */
+    /* margin-right: 10px;
+    margin-left: 10px;
+    max-width: 40%; */
+    min-width: 400px;
+    padding: 10px;
+    width: 48%;
+}
+
+.zomato-site
+{   border: 1px solid var(--head-bg-color);
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 0px;
+    /* width: 100%; */
+}
+
+.div-header
+{   background: var(--head-bg-color);
+    color: var(--head-text);
+    padding: 10px;
+}
+
+.div-text
+{   padding: 10px;
+}
+
+.button
+{   background: var(--head-bg-color);
+    border: 1px solid var(--head-brd-color);
+    border-radius: 2px;
+    color: var(--head-text);
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.button:hover
+{   background: var(--head-text);
+    color: var(--head-bg-color);
+}
+
+/*                                  */
+/* style for input form             */
+/*                                  */
+
+.input-div
+{   border: 1px solid var(--div-brd-color);
+    border-radius: var(--div-brd-radius);
+    margin-bottom: 10px;
+}
+
+form
+{   padding: 10px;
+}
+
+.text-input
+{   width: 100%;
+}
+
+/*                                  */
+/* miscellaneous style              */
+/*                                  */
+
+.map
+{   display: none;
+    justify-content: center;
+}
+/*                                  */
+/* style for sticky footer          */
+/*                                  */
+
+body, html
+{   height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper
+{   background: rgba(255, 0, 0, 0.5);
+    height: auto;
+    margin-bottom: -30px;
+    padding: 10px;
+    min-height: 100%;
+}
+
+.push
+{   background: yellow;
+    clear: both;
+    height: 31px;
+}
+
+footer
+{   background: var(--head-bg-color);
+    border: 1px solid var(--head-brd-color);
+    border-radius: 5px;
+    color: var(--head-text);
+    font-size: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+</style>
     </head>
 
     <body>
@@ -27,14 +170,11 @@
             <header>Foodie</header>
 
             <main id="main-content">
+<!--                <div class="section-wrapper"> -->
                 <section class="map-section">
                     <div class="input-div">
                         <div class="div-header" value="form">Your Location</div>
                         <form>
-                            <input id="foursquare"
-                                   name="foursquare"
-                                   type="checkbox"> Use foursquare
-                            <br>
                             <label for="input-city">City:</label>
                             <input class="text-input"
                                    id="input-city"
@@ -88,7 +228,11 @@
                 </section>
 
                 <section class="foodie-section">
+                    <div class="zomato-site"></div>
+                    <div class="zomato-site"></div>
+                    <div class="zomato-site"></div>
                 </section>
+<!--                 </div> -->
             </main>
 
             <div class="push"></div>
@@ -96,11 +240,4 @@
 
         <footer>Copyright&copy;</footer>
     </body>
-
-    <!-- link to jQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
-    <script language="JavaScript"
-            src="scripts/page.js">
-    </script>
 </html>
