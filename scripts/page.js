@@ -46,7 +46,6 @@ function getMap(locations)
     {   // Only one element in the array...its the center of the map.  There are no points of
         // interest
         URL = URL + "&center=" + locations[0] + "," + locations[1];
-    alert (URL);
     }
 
     // complete the seach query with images type (satellite), zoom level and image size
@@ -153,47 +152,8 @@ console.log("getZomato()");
     })
     .then(function(response)
     {
-        // var zomatoDiv = $("<div>");
-        // var headDiv = $("<div>");
-        // var textDiv = $("<div>");
-
-        // var p1 = $("<p>");
-        // var p2 = $("<p>");
-        // var p3 = $("<p>");
-        // var p4 = $("<p>");
-        // var p5 = $("<p>");
-        // var p6 = $("<p>");
-
         response.restaurants.forEach (function(data)
         {   
-        //     zomatoDiv = $("<div>");
-        //     headDiv = $("<div>");
-            
-        //     headDiv
-        //         .addClass("div-header")
-        //         .text(data.restaurant.name);
-
-        //     p1.html(formatAddress(data.restaurant.location.address));
-        //     p3.text(data.restaurant.cuisines);
-        //     p4.text("average cost for 2: " + data.restaurant.currency + data.restaurant.average_cost_for_two);
-        //     p5.text("rated: " + data.restaurant.user_rating.aggregate_rating);
-        //     p6.text(data.restaurant.user_rating.votes + " votes");
-
-        //     textDiv
-        //         .addClass("div-text")
-        //         .append (p1)
-        //         .append (p2)
-        //         .append (p3)
-        //         .append (p4)
-        //         .append (p5)
-        //         .append (p6);
-
-        //     zomatoDiv
-        //         .addClass("zomato-site")
-        //         .append(headDiv)
-        //         .append(textDiv);
-
-        //     $(".foodie-section").append(zomatoDiv);
             displayZomato (data, name)
         });
     })
@@ -204,8 +164,6 @@ console.log("getZomato()");
 
 function searchZomato (latitude, longitude)
 {   // get data from Zomato for the establishment at the specified latitude and longitude
-console.log("********************");
-console.log("searchZomato()");
     
     var queryURL = "https://developers.zomato.com/api/v2.1/search?count=5&&lat=" + latitude +
                    "&lon=" + longitude + 
@@ -220,54 +178,15 @@ console.log("searchZomato()");
     })
     .then(function(response)
     {
-        // var zomatoDiv = $("<div>");
-        // var headDiv = $("<div>");
-        // var textDiv = $("<div>");
-
-        // var p1 = $("<p>");
-        // var p2 = $("<p>");
-        // var p3 = $("<p>");
-        // var p4 = $("<p>");
-        // var p5 = $("<p>");
-        // var p6 = $("<p>");
-
         var map = [];
 
         // the first element is the center of the map
-        // While testing, use the coordinates of the first item in FourSquare response as the center of the
-        // map
+// While testing, use the coordinates of the first item in FourSquare response as the center of the
+// map
         map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
 
         response.restaurants.forEach (function(data)
         {   
-        //     zomatoDiv = $("<div>");
-        //     headDiv = $("<div>");
-            
-        //     headDiv
-        //         .addClass("div-header")
-        //         .text(data.restaurant.name);
-
-        //     p1.html(formatAddress(data.restaurant.location.address));
-        //     p3.text(data.restaurant.cuisines);
-        //     p4.text("average cost for 2: " + data.restaurant.currency + data.restaurant.average_cost_for_two);
-        //     p5.text("rated: " + data.restaurant.user_rating.aggregate_rating);
-        //     p6.text(data.restaurant.user_rating.votes + " votes");
-
-        //     textDiv
-        //         .addClass("div-text")
-        //         .append (p1)
-        //         .append (p2)
-        //         .append (p3)
-        //         .append (p4)
-        //         .append (p5)
-        //         .append (p6);
-
-        //     zomatoDiv
-        //         .addClass("zomato-site")
-        //         .append(headDiv)
-        //         .append(textDiv);
-
-        //     $(".foodie-section").append(zomatoDiv);
             displayZomato (data, name)
 
             map.push([ data.restaurant.location.latitude,  data.restaurant.location.longitude]);
@@ -401,9 +320,6 @@ $(document).ready(function()
         zoomLevel = 10;                     // 400px images covers ~ 25 miles 
         if (range == 10) zoomLevel = 11;    // 400px images covers ~ 12 miles
         if (range == 5) zoomLevel = 12      // 400px images covers ~ 6 miles
-
-        alert ("zoom level: " + zoomLevel);
-//         getMap (loc8s);
     });
 
     $("#location-button").on("click", function(event)
@@ -412,6 +328,9 @@ $(document).ready(function()
         // Get data from the form and...
         // - retrieve a map from MapQuest
         // - get data from 
+
+        // Clear any previous results
+        $(".foodie-section").empty();
 
         // getMap() takes 1 parameter -- an array.  This array can have an arbitrary number of elements,
         // but must have at least one.
