@@ -1,6 +1,11 @@
 //Foursquare SEARCH endpoint
 var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
 var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
+var near = ''
+var userRadiusMi = ''
+var userRadiusM = userRadiusMi / 0.00062137
+var version = 20180918
+var query = ''
 
 
 var getSearch = function (queryURL) {
@@ -9,7 +14,11 @@ var getSearch = function (queryURL) {
         method: "GET"
     })
         .then(function (response) {
-        console.log(response.response.venues)
+            if (response.response.venues.length){
+                console.log(response.response.venues)
+            } else {
+                console.log("No Results!")
+            }
     });
 }
 
@@ -27,32 +36,31 @@ function getCurrentLocation() {
     function showPosition(position) {
         var curLat = position.coords.latitude
         var curLon = position.coords.longitude
-        //need to trim to one decimal
         var latLon = Math.round( curLat * 10 ) / 10 + ',' + Math.round( curLon * 10 ) / 10
-        var near = $("#locationSearch").val()
-        var userRadiusMi = $("#radiusSearch").val()
-        var userRadiusM = userRadiusMi / 0.00062137
-        var version = 20180918
-        var query = $("#query").val()
-
-
-        if (!$("#locationSearch").val()) {
-            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
-            console.log(queryURL)
-            getSearch(queryURL)
-        } else if ($("#locationSearch").val()) {
-            var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
-            getSearch(queryURL)
-        } else {
-            console.log("Broken")
-        }
+        userRadiusMi = $("#radiusSearch").val()
+        userRadiusM = userRadiusMi / 0.00062137
+        query = $("#query").val()
+        
+        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+        getSearch(queryURL)
     }
 }
 
 $("#submitSearch").on("click", function () {
 
-    getCurrentLocation()
-    
+    if (!$("#locationSearch").val()) {
+        getCurrentLocation()
+    } else if ($("#locationSearch").val()){
+        near = $("#locationSearch").val()
+        userRadiusMi = $("#radiusSearch").val()
+        userRadiusM = userRadiusMi / 0.00062137
+        query = $("#query").val()
+
+        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+        getSearch(queryURL)
+    } else{
+        console.log("Broken")
+    }
 })
 
 
