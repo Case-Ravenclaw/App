@@ -192,7 +192,7 @@ console.log("getZomato()");
     var queryURL = "https://developers.zomato.com/api/v2.1/search?count=1&q=" + name +
                    "&lat=" + latitude +
                    "&lon=" + longitude + 
-                   "&radius=10000";
+                   "&radius=1000";
 
     $.ajax(
     {   url: queryURL,
@@ -213,45 +213,45 @@ console.log("getZomato()");
     });
 }
 
-function searchZomato (latitude, longitude)
-{   // get data from Zomato for the establishment at the specified latitude and longitude
-    
-    var queryURL = "https://developers.zomato.com/api/v2.1/search?count=5&&lat=" + latitude +
-                   "&lon=" + longitude + 
-                   "&radius=" + radius;
-
-    $.ajax(
-    {   url: queryURL,
-        method: "GET",
-        beforeSend: function(xhr)
-        {   xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
-        },
-    })
-    .then(function(response)
-    {
-        var map = [];
-
-        // the first element is the center of the map
-// While testing, use the coordinates of the first item in FourSquare response as the center of the
-// map
-        map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
-
-        var count = 1;
-        response.restaurants.forEach (function(data)
-        {   
-            makeZomato (count);
-        
-            displayZomato (data, name, count++)
-
-            map.push([ data.restaurant.location.latitude,  data.restaurant.location.longitude]);
-        });
-
-        getMap (map);
-    })
-    .catch(function(e)
-    { console.log(e);
-    });
-}
+// function searchZomato (latitude, longitude)
+// {   // get data from Zomato for the establishment at the specified latitude and longitude
+//     
+//     var queryURL = "https://developers.zomato.com/api/v2.1/search?count=5&&lat=" + latitude +
+//                    "&lon=" + longitude + 
+//                    "&radius=" + radius;
+// 
+//     $.ajax(
+//     {   url: queryURL,
+//         method: "GET",
+//         beforeSend: function(xhr)
+//         {   xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
+//         },
+//     })
+//     .then(function(response)
+//     {
+//         var map = [];
+// 
+//         // the first element is the center of the map
+// // While testing, use the coordinates of the first item in FourSquare response as the center of the
+// // map
+//         map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
+// 
+//         var count = 1;
+//         response.restaurants.forEach (function(data)
+//         {   
+//             makeZomato (count);
+//      
+//             displayZomato (data, name, count++)
+// 
+//             map.push([ data.restaurant.location.latitude,  data.restaurant.location.longitude]);
+//         });
+// 
+//         getMap (map);
+//     })
+//     .catch(function(e)
+//     { console.log(e);
+//     });
+// }
 
 function getFourSquare(lat, lng)
 {   
