@@ -11,6 +11,7 @@ var userRadiusM = userRadiusMi / 0.00062137
 var version = 20180918
 var query = ''
 var venueIDs = []
+$(".searchAgain").hide()
 
 var getSearch = function (queryURL) {
     $.ajax({
@@ -68,14 +69,6 @@ var idSearch = function () {
 
                 var $linkA = $("<a>").text("View Website").attr("href", response.response.venue.page.pageInfo.links.items[0].url).addClass("link")
 
-                console.log($nameP)
-                console.log($addressP)
-                console.log($categoryP)
-                console.log($ratingP)
-                console.log($pricesP)
-                console.log($hoursP)
-                console.log($linkA)
-
                 $resultDiv.append($nameP)
                 $resultDiv.append($addressP)
                 $resultDiv.append($categoryP)
@@ -85,8 +78,6 @@ var idSearch = function () {
                 $resultDiv.append($linkA)
 
                 $(".results").append($resultDiv)
-
-                console.log($resultDiv)
             })
     }
 }
@@ -117,6 +108,8 @@ function getCurrentLocation() {
 
 $("#submitSearch").on("click", function () {
     venueIDs = []
+    $(".main").hide()
+    $(".searchAgain").show()
     if (!$("#locationSearch").val()) {
         getCurrentLocation()
     } else if ($("#locationSearch").val()) {
@@ -130,4 +123,10 @@ $("#submitSearch").on("click", function () {
     } else {
         console.log("Broken")
     }
+})
+
+$(".searchAgain").on("click", function(){
+    $(".main").show()
+    $(".results").empty().hide()
+    $(".searchAgain").hide()
 })
