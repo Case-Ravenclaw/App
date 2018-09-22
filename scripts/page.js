@@ -198,7 +198,7 @@ console.log("getZomato()");
     {   url: queryURL,
         method: "GET",
         beforeSend: function(xhr)
-        {   xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
+        {   xhr.setRequestHeader('user-key', '  ');
         },
     })
     .then(function(response)
