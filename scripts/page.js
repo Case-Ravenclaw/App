@@ -124,12 +124,14 @@ function makeStars (numStars)
     return starBar;
 }
 
-function displayZomato (data, name)
+// function displayZomato (data, name)
+function displayZomato (data, name, number)
 {   // get data from Zomato for the establishment at the specified latitude and longitude
 console.log("********************");
 console.log("displayZomato()");
     
-    var zomatoDiv = $("<div>");
+    var zomatoDiv = $(".zomato-site[value='" + number + "']");
+console.log(zomatoDiv);
     var headDiv = $("<div>");
     var textDiv = $("<div>");
 
@@ -140,7 +142,6 @@ console.log("displayZomato()");
     var p5 = $("<p>");
     var p6 = $("<p>");
 
-    zomatoDiv = $("<div>");
     headDiv = $("<div>");
         
     headDiv
@@ -163,14 +164,26 @@ console.log("displayZomato()");
         .append (p6);
 
     zomatoDiv
-        .addClass("zomato-site")
         .append(headDiv)
         .append(textDiv);
+}
+
+function makeZomato (number)
+{   // The Zomato API call is asynchronous and the order those API calls complete and are returned
+    // cannot be determined by synchronous code...I can't submit the search and add a marker to the
+    // map in a simple loop.  displayZomato() can't make the <div> elements to display the data for
+    // each restaurant.  But I can make a <div> element ahead of time and put nothing in it except an
+    // attribute value to identify it.  displayZomato () uses these elements.
+
+    var zomatoDiv = $("<div>");
+    zomatoDiv
+        .addClass("zomato-site")    
+        .attr("value", number);
 
     $(".foodie-section").append(zomatoDiv);
 }
 
-function getZomato (name, latitude, longitude)
+function getZomato (name, latitude, longitude, number)
 {   // get data from Zomato for the establishment at the specified latitude and longitude
 console.log("********************");
 console.log("getZomato()");
@@ -192,7 +205,7 @@ console.log("getZomato()");
     {
         response.restaurants.forEach (function(data)
         {   
-            displayZomato (data, name)
+            displayZomato (data, name, number)
         });
     })
     .catch(function(e)
@@ -223,9 +236,12 @@ function searchZomato (latitude, longitude)
 // map
         map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
 
+        var count = 1;
         response.restaurants.forEach (function(data)
         {   
-            displayZomato (data, name)
+            makeZomato (count);
+        
+            displayZomato (data, name, count++)
 
             map.push([ data.restaurant.location.latitude,  data.restaurant.location.longitude]);
         });
@@ -325,12 +341,15 @@ var queryURL = "";
 // map
         map.push([response.response.groups[0].items[0].venue.location.lat, response.response.groups[0].items[0].venue.location.lng]);
 
+        var count = 1; 
         response.response.groups[0].items.forEach(function(data)
         {
             console.log("location: ", data.venue.location.lat, " ", data.venue.location.lng)
             // Send these coordinates to the Zomato function
 
-            getZomato (data.venue.name, data.venue.location.lat,  data.venue.location.lng);
+            makeZomato (count);
+        
+            getZomato (data.venue.name, data.venue.location.lat,  data.venue.location.lng, count++);
 
             // and pust them into the array for getMaps()
             map.push([ data.venue.location.lat,  data.venue.location.lng]);
