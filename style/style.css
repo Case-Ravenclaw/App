@@ -3,8 +3,8 @@
 }
 
 :root
-{   --div-brd-color: black;
-    --div-brd-radius: 5px;
+{   /* --div-brd-color: blue; */
+    --div-brd-radius: 2px;
     --head-bg-color: blue;
     --head-brd-color: darkblue;
     --head-text: white;
@@ -19,28 +19,34 @@ header
     padding: 20px;
     text-align: center;
 }
-
-.foodie-section, .map-section
-{   background: rgba(0, 255, 0, 0.5);
-    float: left;
-    margin-right: 10px;
-    margin-left: 10px;
-    padding: 10px;
-    width: 45%;
+#main-content
+{   display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.food-site
-{   border: 1px solid black;
-    height: 100px;
-    margin-bottom: 10px;
+.foodie-section, .map-section
+{   min-width: 400px;
     padding: 10px;
-    width: 100%
+    width: 48%;
+}
+
+.zomato-site
+{   border: 1px solid var(--head-bg-color);
+    border-radius: var(--div-brd-radius);
+    margin-bottom: 10px;
+    padding: 0px;
 }
 
 .div-header
 {   background: var(--head-bg-color);
     color: var(--head-text);
     padding: 10px;
+}
+
+.div-text
+{   padding: 10px;
 }
 
 .button
@@ -62,7 +68,7 @@ header
 /*                                  */
 
 .input-div
-{   border: 1px solid var(--div-brd-color);
+{   border: 1px solid var(--head-bg-color);
     border-radius: var(--div-brd-radius);
     margin-bottom: 10px;
 }
@@ -95,8 +101,7 @@ body, html
 }
 
 .wrapper
-{   background: rgba(255, 0, 0, 0.5);
-    height: auto;
+{   height: auto;
     margin-bottom: -30px;
     padding: 10px;
     min-height: 100%;
@@ -122,7 +127,7 @@ footer
 /* style for sticky footer          */
 /*                                  */
 
-@media screen and (max-width: 780px)
+@media screen and (max-width: 840px)
 {   .foodie-section, .map-section
     {   width: 100%;
     }
