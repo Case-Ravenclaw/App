@@ -7,7 +7,6 @@ var userRadiusM = userRadiusMi / 0.00062137
 var version = 20180918
 var query = ''
 
-
 var getSearch = function (queryURL) {
     $.ajax({
         url: queryURL,
@@ -34,6 +33,7 @@ var  showPosition =  function showPosition(position) {
     var curLat = position.coords.latitude
     var curLon = position.coords.longitude
     var latLon = Math.round( curLat * 10 ) / 10 + ',' + Math.round( curLon * 10 ) / 10
+    console.log("latitude, longitude", latLon)
     userRadiusMi = $("#radiusSearch").val()
     userRadiusM = userRadiusMi / 0.00062137
     query = $("#query").val()
@@ -41,12 +41,6 @@ var  showPosition =  function showPosition(position) {
     var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
     getSearch(queryURL)
 }
- 
-// var getCurrentLocation = function getCurrentLocation() {
-//     //Get current location (default if leaving location blank)
-//     getLocation()
-
-// }
 
 $("#submitSearch").on("click", function () {
 
@@ -64,25 +58,83 @@ $("#submitSearch").on("click", function () {
         console.log("Broken")
     }
 })
+///////////////////
+//EXPLORE
+/////////////////
+
+var q = "Luna"
+var userRadiusMi = ""
+var userRadiusM = userRadiusMi / 0.00062137
+var cuisines = ""
+var lat = ""
+var lon = ""
+var radius = 1000
+var limit = 10
+//Zomato
+
+var buildZomatoCall = function (){
+    q = $("#locationExplore").val().trim()
+    cuisines = $("#cuisines").val().data();
+
+}
+var calculatePosition = function() {
+    var curLat = Math.round( position.coords.latitude * 10 ) / 10;
+    var curLon = Math.round( position.coords.longitude * 10 ) / 10;
+    // var latLon =  + ',' + Math.round( curLon * 10 ) / 10
+    console.log("EXPLORE LAT", curLat);
+    console.log("EXPLORE LON", curLon)
+
+    userRadiusMi = $("#radiusSearch").val()
+    userRadiusM = userRadiusMi / 0.00062137
+
+}
 
 
+var doZomatoCall = function() {
+var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + q + "&radius=" + radius + "&count=" + limit;
 
-// // Foursquare EXPLORE endpoint 
-// var radius = "1000"
-// var section = "food"
-// var city = "Willoughby,OH"
-// var fs_id = "HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0"
-// var fs_secret = "OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y"
-// var v = "20180918"
-// var open = "1"
-// var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + fs_id + "&client_secret=" + fs_secret + "&near=" + city + "&limit=10&section=" + section + "&radius=" + radius + "&v=" + v + "&openNow=" + open
+$.ajax({
+url: queryURL,
+method: "GET",
+beforeSend: function(xhr){xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');},
+})
+.then(function(response) {
+    apiResponse=response.restaurants;
 
-// $("#submitExplore").on("click", function () {
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         var results = response.response.groups
-//         console.log(results)
-//     })
-// })
+console.log(response.restaurants);
+});
+}
+// doZomato();
+
+
+var showPositionExplore = function showPositionExplore() {
+    var curLat = Math.round( position.coords.latitude * 10 ) / 10;
+    var curLon = Math.round( position.coords.longitude * 10 ) / 10;
+    // var latLon =  + ',' + Math.round( curLon * 10 ) / 10
+    console.log("EXPLORE LAT", latLon)
+    userRadiusMi = $("#radiusSearch").val()
+    userRadiusM = userRadiusMi / 0.00062137
+    query = $("#query").val()
+    
+    var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+    getSearch(queryURL)
+    
+}
+
+$("#submitExplore").on("click", function () {
+    getLocation();
+    calculatePosition(position);
+    buildZomatoCall();
+
+
+    // // if (!$("#locationSearch").val()) {
+    //     getLocation()
+    
+    //     near = $("#locationExplore").val()
+    //     userRadiusMi = $("#radiusSearch").val()
+    //     userRadiusM = userRadiusMi / 0.00062137
+    //     query = $("#query").val()
+
+    //     var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + q + "&radius=" + radius + "&count=" + "&lat=" + curLat + ;
+    //     getExplore(queryURL)
+})
