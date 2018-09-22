@@ -6,7 +6,7 @@ var userRadiusMi = ''
 var userRadiusM = userRadiusMi / 0.00062137
 var version = 20180918
 var query = ''
-
+var venueIDs =[]
 
 var getSearch = function (queryURL) {
     $.ajax({
@@ -15,11 +15,25 @@ var getSearch = function (queryURL) {
     })
         .then(function (response) {
             if (response.response.venues.length){
-                console.log(response.response.venues)
+                for(var i =0; i < response.response.venues.length; i++){
+                    venueIDs.push(response.response.venues[i].id)
+                }console.log("venues " + venueIDs)
             } else {
                 console.log("No Results!")
             }
     });
+}
+
+var idSearch = function(){
+for(var j = 0; j < venueIDs.length; j++){
+    var queryURL = "https://api.foursquare.com/v2/venues/" + venuesIDs[j] + "?client_id=" + client_id + "&client_secret=" + client_secret +"&v=" + version
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+    .then(function(response){
+        console.log("address " + response.response.venues.location.address)
+    })
 }
 
 function getCurrentLocation() {
@@ -63,24 +77,3 @@ $("#submitSearch").on("click", function () {
     }
 })
 
-
-
-//Foursquare EXPLORE endpoint 
-// var radius = "1000"
-// var section = "food"
-// var city = "Willoughby,OH"
-// var fs_id = "HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0"
-// var fs_secret = "OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y"
-// var v = "20180918"
-// var open = "1"
-// var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + fs_id + "&client_secret=" + fs_secret + "&near=" + city + "&limit=10&section=" + section + "&radius=" + radius + "&v=" + v + "&openNow=" + open
-
-// $("#submitExplore").on("click", function () {
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         var results = response.response.groups
-//         console.log(results)
-//     })
-// })
