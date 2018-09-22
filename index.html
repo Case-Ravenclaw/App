@@ -117,7 +117,116 @@
 
 
 
+    <link rel="stylesheet"
+              href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+              integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+              crossorigin="anonymous">
+        <link href="style/style.css"
+              rel="stylesheet"
+              type="text/css">
+        <style>
+        </style>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <header>Foodie</header>
+
+            <main id="main-content">
+                <section class="map-section">
+                    <div class="input-div">
+                        <div class="div-header" value="form">Your Location</div>
+                        <form>
+                            <input id="foursquare"
+                                   name="foursquare"
+                                   type="checkbox"> Use foursquare
+                            <br>
+                            <!-- <label for="input-city">City:</label>
+                            <input class="text-input"
+                                   id="input-city"
+                                   name="input-city"
+                                   placeholder="Your city or town"
+                                   type="text">
+
+                            <label for="input-state">State:</label>
+                            <input class="text-input"
+                                   id="input-state"
+                                   name="input-state"
+                                   placeholder="XX"
+                                   type="text"> -->
+
+                                   <div class="form-group">
+                                        <label for="sectionExplore">Select Food</label>
+                                        <select class="form-control" id="cuisines">
+                                            <option data="-1">What are you in the mood for?</option>
+                                            <option data="25">Chinese</option>
+                                            <option data="40">fastfood</option>
+                                            <option data="233">icecream</option>
+                                            <option data="134">german</option>
+                                            <option data="148">indian</option>
+                                            <option data="55">italian</option>
+                                            <option data="60">japenese</option>
+                                            <option data="70">mediteranean</option>
+                                            <option data="73">mexican</option>
+                                            <option data="82">pizza</option>
+                                            <option data="83">seafood</option>
+                                            <option data="966">southwestern</option>
+                                            <option data="89">steak</option>
+                                            <option data="99">vegetarian</option>
+                                        </select>
+                                    </div>
+
+                            <label for="input-radius">Radius</label><br>
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=5>5 miles
+                            <br>
+                                   
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=10>10 miles
+                            <br>
+
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=15>15 miles
+                            <br>
+
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=20>20 miles
+                            <br>
+
+                            <button class="button" id="location-button" type="button" value="submit">SUBMIT</button>
+                        </form>
+                    </div>
+
+                    <div class="map">
+                        <img id="map" src="http://placehold.it/400x300">
+                    </div>
+                </section>
+
+                <section class="foodie-section">
+                </section>
+            </main>
+
+            <div class="push"></div>
+        </div>
+
+
+
     <script type="text/javascript" src="assets/js/app.js"></script>
+    <script language="JavaScript"
+    src="scripts/page.js">
+</script>
 </body>
 
 </html>
