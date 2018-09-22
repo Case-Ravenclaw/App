@@ -1,28 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tomato Zomato</title>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <title>Search for a place</title>
+
+    <!-- 
+    <style>
+        .divider { 
+            width:100%; 
+            text-align:center; 
+            border-bottom: 1px solid #000; 
+            line-height:0.1em; 
+            margin:60px 20px; 
+            } 
+        .divider span { 
+            background:#fff; 
+            padding:0 10px; 
+            }
+    </style> -->
 </head>
+
 <body>
-    <!-- jumbotron -->
-    <!--  -->
-    <!--  -->
-    <!--  -->
-    <button id ="btn">Hello</button>
+    <div class="jumbotron bg-dark text-white text-center">
+        <h1>Zomato and Foursquare APIs</h1>
+    </div>
+    <div class="container row">
+        <div class="search-container card col-lg-5 p-0">
+            <h3 class="card-header bg-dark text-white">Search</h3>
+            <h5 class="card-header">Find a specific place</h5>
+            <form>
+                <div class="container form-container">
+                    <div class="form-group">
+                        <label for="locationSearch">Query</label>
+                        <input type="text" class="form-control" id="query" placeholder="McDonalds">
+                    </div>
+                    <div class="form-group">
+                        <label for="locationSearch">Near</label>
+                        <input type="text" class="form-control" id="locationSearch" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+                    </div>
+                    <div class="form-group">
+                        <label for="radiusSearch">Radius (miles)</label>
+                        <select class="form-control" id="radiusSearch">
+                            <option>1</option>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <button id="submitSearch" type="submitSearch" class="btn btn-dark">Submit</button>
+        </div>
 
-<!-- possible firebase  -->
+        <p class="divider col-lg-1"><span>OR</span></p>
 
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-<!-- underscore.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"></script>
-<!-- vanilla -->
-<script src="app.js"></script>
+        <div class="explore-container card col-lg-5 p-0">
+            <h3 class="card-header bg-dark text-white">Explore</h3>
+            <h5 class="card-header">Look for places</h5>
+            <form>
+                <div class="container form-container">
+                    <div class="form-group">
+                        <label for="locationExplore">Near</label>
+                        <input type="text" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+                    </div>
+                    <div class="form-group">
+                        <label for="sectionExplore">Section</label>
+                        <select class="form-control" id="sectionExplore">
+                            <option data="food">Food</option>
+                            <option data="drinks">Drinks</option>
+                            <option data="coffee">Coffee</option>
+                            <option data="shops">Shops</option>
+                            <option data="arts">Art</option>
+                            <option data="outdoors">Outdoors</option>
+                            <option data="sights">Sights</option>
+                            <option data="topPicks">Top Picks</option>
+                            <option data="trending">Trending</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="radiusExplore">Radius (miles)</label>
+                        <select class="form-control" id="radiusExplore">
+                            <option>1</option>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>15</option>
+                            <option>20</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="openExplore">
+                        <label class="form-check-label" for="openExplore">
+                            Open Now
+                        </label>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <button id="submitExplore" type="submitExplore" class="btn btn-dark">Submit</button>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="card">
+            <section class="card-header bg-dark text-white"> Your results </section>
+            <div class="container" id="results">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-left"> Name </th>
+                        <th scope="col" class="text-center"> Address </th>
+                        <th scope="col" class="text-left"> Distance </th>
+                    </tr>
+                    </thead>
+                    <tbody class="abc">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="card-footer bg-dark text-white text-center">Copyright&copy;<button id="testBtn">Test</button></button></footer>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <!-- vanilla -->
+    <script src="assets/javascript/app.js"></script>
+
+
 </body>
+
 </html>
+
