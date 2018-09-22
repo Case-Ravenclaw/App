@@ -86,6 +86,44 @@ function formatAddress(address)
     return rString;
 }
 
+function makeStars (numStars)
+{   // Create a row of five stars to graphically represent the avaerage rating assigned by customers
+    //
+    // I'm using Font Awesome icons for outlined and solid stars.  The class used to identify a hollow
+    // star is "far fa-star" and a solid star is "fas fa-star".  A half-star is "fas fa-star-half-alt".
+
+    // First create a <div> element to hold the sars 
+
+    var starBar = $("<div>");
+    starBar.addClass ("star-div");
+
+    // Next, create five <i> elements to represent the star rating.  Font Awesome recommends using the
+    // <i> tag to include their icons in HTML.
+
+    for (var i=1; i<6; i++)   
+    {   var iTag = $("<i>");
+
+        if (i <= numStars)
+        {   iTag.addClass("fas fa-star");
+        }
+        else
+        if ((i - numStars) < 1)
+        {   // If numStars is not a round number (it will happen far more often than not), there will be
+            // one iteration of the loop where i is neither less than numStars nor greater than numStars.
+            // Add a half star to the row...
+
+            iTag.addClass("fas fa-star-half-alt");
+        }
+        else
+        {   iTag.addClass("far fa-star");
+        }
+
+        starBar.append (iTag);
+    }
+
+    return starBar;
+}
+
 function displayZomato (data, name)
 {   // get data from Zomato for the establishment at the specified latitude and longitude
 console.log("********************");
@@ -118,9 +156,9 @@ console.log("displayZomato()");
     textDiv
         .addClass("div-text")
         .append (p1)
-        .append (p2)
         .append (p3)
         .append (p4)
+        .append (makeStars (data.restaurant.user_rating.aggregate_rating))
         .append (p5)
         .append (p6);
 

@@ -27,8 +27,7 @@ header
 }
 
 .foodie-section, .map-section
-{   background: rgba(0, 255, 0, 0.5);
-    min-width: 400px;
+{   min-width: 400px;
     padding: 10px;
     width: 48%;
 }
@@ -102,8 +101,7 @@ body, html
 }
 
 .wrapper
-{   background: rgba(255, 0, 0, 0.5);
-    height: auto;
+{   height: auto;
     margin-bottom: -30px;
     padding: 10px;
     min-height: 100%;
@@ -129,7 +127,7 @@ footer
 /* style for sticky footer          */
 /*                                  */
 
-@media screen and (max-width: 780px)
+@media screen and (max-width: 840px)
 {   .foodie-section, .map-section
     {   width: 100%;
     }
