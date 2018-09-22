@@ -15,127 +15,124 @@
 
     <title>Search for a place</title>
 
-    <!-- 
-    <style>
-        .divider { 
-            width:100%; 
-            text-align:center; 
-            border-bottom: 1px solid #000; 
-            line-height:0.1em; 
-            margin:60px 20px; 
-            } 
-        .divider span { 
-            background:#fff; 
-            padding:0 10px; 
-            }
-    </style> -->
 </head>
 
 <body>
     <div class="jumbotron bg-dark text-white text-center">
-        <h1>Zomato and Foursquare APIs</h1>
+        <h1>Zomato and Foursquare APIs:</h1>
+        <h4>&bull; A Working Title &bull;</h4>
     </div>
-    <div class="container row">
-        <div class="search-container card col-lg-5 p-0">
-            <h3 class="card-header bg-dark text-white">Search</h3>
-            <h5 class="card-header">Find a specific place</h5>
-            <form>
-                <div class="container form-container">
-                    <div class="form-group">
-                        <label for="locationSearch">Query</label>
-                        <input type="text" class="form-control" id="query" placeholder="McDonalds">
+    <div class="container">
+        <div class="row">
+            <div class="search-container card col-lg-5 p-0">
+                <h3 class="card-header bg-dark text-white">Search</h3>
+                <h5 class="card-header">Find a specific place</h5>
+                <form>
+                    <br>
+                    <div class="container form-container">
+                        <div class="form-group">
+                            <label for="locationSearch">Query</label>
+                            <input type="text" class="form-control" id="query" placeholder="McDonalds">
+                        </div>
+                        <div class="form-group">
+                            <label for="locationSearch">Near</label>
+                            <input type="text" class="form-control" id="locationSearch" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+                        </div>
+                        <div class="form-group">
+                            <label for="radiusSearch">Radius (miles)</label>
+                            <select class="form-control" id="radiusSearch">
+                                <option>1</option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="locationSearch">Near</label>
-                        <input type="text" class="form-control" id="locationSearch" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
-                    </div>
-                    <div class="form-group">
-                        <label for="radiusSearch">Radius (miles)</label>
-                        <select class="form-control" id="radiusSearch">
-                            <option>1</option>
-                            <option>5</option>
-                            <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-            <button id="submitSearch" type="submitSearch" class="btn btn-dark">Submit</button>
-        </div>
+                </form>
+                <br>
+                <br>
+                <button id="submitSearch" type="submitSearch" class="btn btn-dark">Search!</button>
+            </div>
 
-        <p class="divider col-lg-1"><span>OR</span></p>
+            <p class="divider col-lg-2 text-center bg-dark text-white"><span>OR</span></p>
 
-        <div class="explore-container card col-lg-5 p-0">
-            <h3 class="card-header bg-dark text-white">Explore</h3>
-            <h5 class="card-header">Look for places</h5>
-            <form>
-                <div class="container form-container">
-                    <div class="form-group">
-                        <label for="locationExplore">Near</label>
-                        <input type="text" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+            <div class="explore-container card col-lg-5 p-0">
+                <h3 class="card-header bg-dark text-white">Explore</h3>
+                <h5 class="card-header">Look for places</h5>
+                <form>
+                    <div class="container form-container">
+                        <div class="form-group">
+                            <br>
+                            <label for="locationExplore">Near</label>
+                            <input type="text" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+                        </div>
+                        <div class="form-group">
+                            <label for="sectionExplore">Section</label>
+                            <select class="form-control" id="sectionExplore">
+                                <option data="food">Food</option>
+                                <option data="drinks">Drinks</option>
+                                <option data="coffee">Coffee</option>
+                                <option data="shops">Shops</option>
+                                <option data="arts">Art</option>
+                                <option data="outdoors">Outdoors</option>
+                                <option data="sights">Sights</option>
+                                <option data="topPicks">Top Picks</option>
+                                <option data="trending">Trending</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="radiusExplore">Radius (miles)</label>
+                            <select class="form-control" id="radiusExplore">
+                                <option>1</option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="openExplore">
+                            <label class="form-check-label" for="openExplore">
+                                Open Now
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="sectionExplore">Section</label>
-                        <select class="form-control" id="sectionExplore">
-                            <option data="food">Food</option>
-                            <option data="drinks">Drinks</option>
-                            <option data="coffee">Coffee</option>
-                            <option data="shops">Shops</option>
-                            <option data="arts">Art</option>
-                            <option data="outdoors">Outdoors</option>
-                            <option data="sights">Sights</option>
-                            <option data="topPicks">Top Picks</option>
-                            <option data="trending">Trending</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="radiusExplore">Radius (miles)</label>
-                        <select class="form-control" id="radiusExplore">
-                            <option>1</option>
-                            <option>5</option>
-                            <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="openExplore">
-                        <label class="form-check-label" for="openExplore">
-                            Open Now
-                        </label>
-                    </div>
-                </div>
-            </form>
-            <br>
-            <button id="submitExplore" type="submitExplore" class="btn btn-dark">Submit</button>
+                </form>
+                <br>
+                <button id="submitExplore" type="submitExplore" class="btn btn-dark">Explore!</button>
+            </div>
         </div>
-    </div>
-    <div class="container row">
-        <div class="card">
-            <section class="card-header bg-dark text-white"> Your results </section>
-            <div class="container" id="results">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="text-left"> Name </th>
-                        <th scope="col" class="text-center"> Address </th>
-                        <th scope="col" class="text-left"> Distance </th>
-                    </tr>
-                    </thead>
-                    <tbody class="abc">
-                    </tbody>
-                </table>
+        <br>
+        <br>
+        <div class="row">
+            <div class="card col-lg-12 pl-0 pr-0">
+                <section class="card-header bg-dark text-white"> <h3>Your results</h3> </section>
+                <div id="results" class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"> Name </th>
+                                <th scope="col text-center"> Address </th>
+                                <th scope="col text-right"> Distance </th>
+                            </tr>
+                        </thead>
+                        <tbody class="abc">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
     <footer class="card-footer bg-dark text-white text-center">Copyright&copy;<button id="testBtn">Test</button></button></footer>
+
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
     <!-- vanilla -->
     <script src="assets/javascript/app.js"></script>
-
 
 </body>
 

@@ -75,14 +75,14 @@ $("#testBtn").on("click", function(){
     // $(".search-container").hide()
     dataCreate()
     dataFill()
-}
-)
+})
 
 var dataCreate = function(data, target){
-    var newTD = $("<td span='col'>")
+    var newTD = $("<td>")
     $(newTD).text(data)
             .appendTo(target)
 }
+
 var dataFill = function(){
     for(var j = 0; j < 10; j++){
         var newTR = $("<tr>")
