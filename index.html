@@ -47,7 +47,7 @@
             text-align:center; 
             border-bottom: 1px solid #000; 
             line-height:0em; 
-            margin:70px 0px; 
+            margin:80px 0px; 
             } 
 
         .divider span { 
@@ -56,31 +56,63 @@
             font-size: 25px;
             }
 
+            /* .btn2 {
+                width: 40%;
+                display: block;
+                margin: 0 auto;
+            } */
 
-section {
-    padding: 50px 0;
-}
 
-section .section-title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-}
-#footer {
-    background: #333;
-}
-#footer h5{
-	padding-left: 10px;
-    border-left: 3px solid #eeeeee;
-    padding-bottom: 6px;
-    margin-bottom: 20px;
-    color:#ffffff;
-}
-#footer a {
-    color: #ffffff;
-    text-decoration: none;
-}
+            .btn2 {
+            display: block;
+            margin: 0 auto;
+            height: 50px;
+            width: 186px;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            border: none;
+            background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+            cursor: pointer;
+            }
+
+            .btn2:hover{
+                transition: all 0.3s ease;
+                background: linear-gradient(45deg, #3bade3 0%, #576fe6 35%, #9844b7 71%, #ff357f 100%);
+            }
+
+            .btn2 span {
+            position: relative;
+            top: 16px;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+
+            section .section-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 50px;
+                text-transform: uppercase;
+            }
+            #footer {
+                background: #333;
+            }
+            #footer h5{
+                padding-left: 10px;
+                border-left: 3px solid #eeeeee;
+                padding-bottom: 6px;
+                margin-bottom: 20px;
+                color:#ffffff;
+            }
+            #footer a {
+                color: #ffffff;
+                text-decoration: none;
+            }
 
     </style>
 </head>
@@ -104,10 +136,6 @@ section .section-title {
                         <a class="nav-link" href="https://github.com/Case-Ravenclaw">About</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -138,7 +166,7 @@ section .section-title {
                     </select>
                 </div>
             </form>
-            <button id="submitSearch" type="submitSearch" class="btn btn-primary">Search <i class="fas fa-arrow-circle-right"></i></button>
+            <button id="submitSearch" type="submitSearch" class="btn2 btn2-primary">Search <i class="fas fa-arrow-circle-right"></i></button>
         </div>
 
         <p class="divider"><span>OR</span></p>
@@ -185,7 +213,7 @@ section .section-title {
                 </div>
             </form>
             <br>
-            <button id="submitExplore" type="submitExplore" class="btn btn-primary mb-5">Explore <i class="fas fa-arrow-circle-right"></i></button>
+            <button id="submitExplore" type="submitExplore" class="btn2 btn2-primary mb-5">Explore <i class="fas fa-arrow-circle-right"></i></button>
         </div>
     </div>
 
