@@ -188,18 +188,24 @@
                     <input type="email" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
                 </div>
                 <div class="form-group float-left col-8 px-0">
-                    <label for="sectionExplore">Category</label>
-                    <select class="form-control" id="sectionExplore">
-                        <option data="food">Food</option>
-                        <option data="drinks">Drinks</option>
-                        <option data="coffee">Coffee</option>
-                        <option data="shops">Shops</option>
-                        <option data="arts">Art</option>
-                        <option data="outdoors">Outdoors</option>
-                        <option data="sights">Sights</option>
-                        <option data="topPicks">Top Picks</option>
-                        <option data="trending">Trending</option>
-                    </select>
+                        <label for="sectionExplore">Select Food</label>
+                        <select class="form-control" id="cuisines">
+                            <option data="-1">What are you in the mood for?</option>
+                            <option data="25">Chinese</option>
+                            <option data="40">Fastfood</option>
+                            <option data="233">Icecream</option>
+                            <option data="134">German</option>
+                            <option data="148">Indian</option>
+                            <option data="55">Italian</option>
+                            <option data="60">Japenese</option>
+                            <option data="70">Mediteranean</option>
+                            <option data="73">Mexican</option>
+                            <option data="82">Pizza</option>
+                            <option data="83">Seafood</option>
+                            <option data="966">Southwestern</option>
+                            <option data="89">Steak</option>
+                            <option data="99">Vegetarian</option>
+                        </select>
                 </div>
                 <div class="form-group float-left col-4 pl-5 selectdiv">
                     <label for="radiusExplore">Radius (miles)</label>
@@ -253,7 +259,7 @@
 
     <body>
         <div class="wrapper">
-            <header>Foodie</header>
+            <!-- <header>Foodie</header> -->
 
             <main id="main-content">
                 <section class="map-section">
@@ -278,7 +284,7 @@
                                    placeholder="XX"
                                    type="text"> -->
 
-                                   <div class="form-group">
+                                   <!-- <div class="form-group">
                                         <label for="sectionExplore">Select Food</label>
                                         <select class="form-control" id="cuisines">
                                             <option data="-1">What are you in the mood for?</option>
@@ -297,7 +303,7 @@
                                             <option data="89">Steak</option>
                                             <option data="99">Vegetarian</option>
                                         </select>
-                                    </div>
+                                    </div> -->
 
                             <label for="input-radius">Radius</label><br>
                             <input class="radio-input"
@@ -341,14 +347,12 @@
                 </section>
             </main>
 
-            <div class="push"></div>
         </div>
 
 
 
     <script type="text/javascript" src="assets/js/app.js"></script>
-    <script language="JavaScript"
-    src="scripts/page.js">
+    <script language="JavaScript" src="scripts/page.js">
 </script>
 </body>
 

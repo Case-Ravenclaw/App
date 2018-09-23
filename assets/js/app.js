@@ -371,8 +371,8 @@ console.log("getZomato()");
     });
 }
 
-function searchZomato (latitude, longitude)
-{   // get data from Zomato for the establishment at the specified latitude and longitude
+// get data from Zomato for the establishment at the specified latitude and longitude
+function searchZomato (latitude, longitude){   
 
     var cuisineId = $("#cuisines").find(':selected').attr("data");
     console.log(cuisineId);
