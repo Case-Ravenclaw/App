@@ -1,16 +1,85 @@
 //Foursquare SEARCH endpoint
-var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
-var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
-
+var client_id = 'FZ5OBOFAZHYVQ0H2MKNGOZCEWDRVIVHLXQS31LD4IU2OML4I';
+//HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0
+//FZ5OBOFAZHYVQ0H2MKNGOZCEWDRVIVHLXQS31LD4IU2OML4I
+var client_secret = 'ZY1UQBPUXBN5P3VCIKVHGQEFNJLOXFQRCR5FPCSLPNCUSYIJ';
+//OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y
+//ZY1UQBPUXBN5P3VCIKVHGQEFNJLOXFQRCR5FPCSLPNCUSYIJ
+var near = ''
+var userRadiusMi = ''
+var userRadiusM = userRadiusMi / 0.00062137
+var version = 20180918
+var query = ''
+var venueIDs = []
+$(".searchAgain").hide()
 
 var getSearch = function (queryURL) {
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL,
+            method: "GET"
+        })
         .then(function (response) {
-        console.log(response.response.venues)
-    });
+            if (response.response.venues.length) {
+                for (var i = 0; i < response.response.venues.length; i++) {
+                    venueIDs.push(response.response.venues[i].id)
+                }
+                idSearch()
+            } else {
+                console.log("No Results!")
+            }
+        });
+}
+
+var idSearch = function () {
+    for (var j = 0; j < venueIDs.length; j++) {
+        var queryURL = "https://api.foursquare.com/v2/venues/" + venueIDs[j] + "?client_id=" + client_id + "&client_secret=" + client_secret + "&v=" + version
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function (response) {
+                //create results div
+                var $resultDiv = $("<div>").addClass('result')
+
+                var $nameP = $("<p>").text(response.response.venue.name).addClass("name")
+                var $addressP = $("<p>").text(response.response.venue.location.address).addClass("address")
+                var $categoryP = $("<p>").text(response.response.venue.categories.name).addClass("category")
+
+                //change the rating to be out of 5
+                var rating = Math.floor(response.response.venue.rating / 2)
+                var $ratingP = $("<p>").text(rating).addClass("rating")
+
+                //adding dollar signs for price tiers
+                var priceArray = []
+                for (var k = 0; k < response.response.venue.price.tier; k++) {
+                    priceArray.push("$")
+                }
+                var $pricesP = $("<p>").text(priceArray.join(" ")).addClass("prices")
+
+                //format hours from boolean to yes/no strings
+                var openString = ''
+                if (response.response.venue.hours.isOpen === true) {
+                    openString = "Open now!"
+                } else if (response.response.venue.hours.isOpen === false) {
+                    openString = "This is not open right now"
+                } else {
+                    openString = "We don't have data on this"
+                }
+                var $hoursP = $("<p>").text(openString).addClass("open")
+
+                var $linkA = $("<a>").text("View Website").attr("href", response.response.venue.page.pageInfo.links.items[0].url).addClass("link")
+
+                $resultDiv.append($nameP)
+                $resultDiv.append($addressP)
+                $resultDiv.append($categoryP)
+                $resultDiv.append($ratingP)
+                $resultDiv.append($pricesP)
+                $resultDiv.append($hoursP)
+                $resultDiv.append($linkA)
+
+                $(".results").append($resultDiv)
+            })
+    }
 }
 
 function getCurrentLocation() {
@@ -27,14 +96,10 @@ function getCurrentLocation() {
     function showPosition(position) {
         var curLat = position.coords.latitude
         var curLon = position.coords.longitude
-        //need to trim to one decimal
-        var latLon = Math.round( curLat * 10 ) / 10 + ',' + Math.round( curLon * 10 ) / 10
-        var near = $("#locationSearch").val()
-        var userRadiusMi = $("#radiusSearch").val()
-        var userRadiusM = userRadiusMi / 0.00062137
-        var version = 20180918
-        var query = $("#query").val()
-
+        var latLon = Math.round(curLat * 10) / 10 + ',' + Math.round(curLon * 10) / 10
+        userRadiusMi = $("#radiusSearch").val()
+        userRadiusM = userRadiusMi / 0.00062137
+        query = $("#query").val()
 
         if (!$("#locationSearch").val()) {
             var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&ll=" + latLon + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
@@ -49,9 +114,22 @@ function getCurrentLocation() {
 }
 
 $("#submitSearch").on("click", function () {
+    venueIDs = []
+    $(".main").hide()
+    $(".searchAgain").show()
+    if (!$("#locationSearch").val()) {
+        getCurrentLocation()
+    } else if ($("#locationSearch").val()) {
+        near = $("#locationSearch").val()
+        userRadiusMi = $("#radiusSearch").val()
+        userRadiusM = userRadiusMi / 0.00062137
+        query = $("#query").val()
 
-    getCurrentLocation()
-    
+        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id=" + client_id + "&openNow=1" + "&client_secret=" + client_secret + "&near=" + near + "&v=" + version + "&intent=browse" + "&radius=" + userRadiusM + "&limit=10" + "&query=" + query
+        getSearch(queryURL)
+    } else {
+        console.log("Broken")
+    }
 })
 
 
@@ -493,4 +571,9 @@ $(document).ready(function()
         {   searchZomato (41.5043, -81.6084);
         }
     });
+$(".searchAgain").on("click", function(){
+    $(".main").show()
+    $(".results").empty().hide()
+    $(".searchAgain").hide()
+})
 })
