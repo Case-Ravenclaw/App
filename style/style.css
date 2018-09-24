@@ -1,16 +1,17 @@
-*
+/* *
 {   box-sizing: border-box;
-}
+} */
 
-:root
-{   /* --div-brd-color: blue; */
-    --div-brd-radius: 2px;
+/* :root
+{    */
+    /* --div-brd-color: blue; */
+    /* --div-brd-radius: 2px;
     --head-bg-color: blue;
     --head-brd-color: darkblue;
     --head-text: white;
-}
+} */
 
-header
+/* header
 {   background: var(--head-bg-color);
     border: 2px solid var(--head-brd-color);
     border-radius: 5px;
@@ -67,7 +68,7 @@ header
 /* style for input form             */
 /*                                  */
 
-.input-div
+/* .input-div
 {   border: 1px solid var(--head-bg-color);
     border-radius: var(--div-brd-radius);
     margin-bottom: 10px;
@@ -79,7 +80,7 @@ form
 
 .text-input
 {   width: 100%;
-}
+} */
 
 /*                                  */
 /* miscellaneous style              */
@@ -94,7 +95,7 @@ form
 /* style for sticky footer          */
 /*                                  */
 
-body, html
+/* body, html
 {   height: 100%;
     margin: 0px;
     padding: 0px;
@@ -121,14 +122,15 @@ footer
     font-size: 10px;
     margin: 10px;
     padding: 10px;
-}
+}  */
 
-/*                                  */
+
+                                 /* */
 /* style for sticky footer          */
 /*                                  */
 
-@media screen and (max-width: 840px)
+/* @media screen and (max-width: 840px)
 {   .foodie-section, .map-section
     {   width: 100%;
     }
-}
+} */
