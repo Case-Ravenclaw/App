@@ -1,10 +1,10 @@
 //Foursquare SEARCH endpoint
 var client_id = 'FZ5OBOFAZHYVQ0H2MKNGOZCEWDRVIVHLXQS31LD4IU2OML4I';
-//HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0
-//FZ5OBOFAZHYVQ0H2MKNGOZCEWDRVIVHLXQS31LD4IU2OML4I
+//var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
+
 var client_secret = 'ZY1UQBPUXBN5P3VCIKVHGQEFNJLOXFQRCR5FPCSLPNCUSYIJ';
-//OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y
-//ZY1UQBPUXBN5P3VCIKVHGQEFNJLOXFQRCR5FPCSLPNCUSYIJ
+//var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
+
 var near = ''
 var userRadiusMi = ''
 var userRadiusM = userRadiusMi / 0.00062137
@@ -377,6 +377,7 @@ function searchZomato (latitude, longitude){
     var cuisineId = $("#cuisines").find(':selected').attr("data");
     console.log(cuisineId);
     
+    console.log("Search Zomato " , radius);
     var queryURL = "https://developers.zomato.com/api/v2.1/search?count=5&&lat=" + latitude +
                    "&lon=" + longitude + 
                    "&radius=" + radius +
@@ -393,7 +394,7 @@ function searchZomato (latitude, longitude){
     {
         var map = [];
 
-        // the first element is the center of the map
+// the first element is the center of the map
 // While testing, use the coordinates of the first item in FourSquare response as the center of the
 // map
         map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
@@ -523,26 +524,39 @@ var queryURL = "";
 }
 
 $(document).ready(function()
-{   //
-    //
+{   
+//
+//
 
 //     getFourSquare("Cleveland");
     getMap ([41.4993, -81.6944]);
 
-    $(".radio-input").on("change", function()
-    {   // event handler for the range radio button
+    // $(".radio-input").on("change", function()
+    // {   // event handler for the range radio button
 
-        var range = $(this).attr("value");
+    //     var range =  $("#radiusExplore").val()
 
+    //     console.log("RADIUS " + range);
+    //     radius = 1609 * range;              // there are 1609 meters in a mile
+
+    //     zoomLevel = 10;                     // 400px images covers ~ 25 miles 
+    //     if (range == 10) zoomLevel = 11;    // 400px images covers ~ 12 miles
+    //     if (range == 5) zoomLevel = 12      // 400px images covers ~ 6 miles
+    // });
+
+    $("#submitExplore").on("click", function(event)
+    {   event.preventDefault();
+
+        var range =  $("#radiusExplore").val()
+
+        console.log("RANGE " + range);
         radius = 1609 * range;              // there are 1609 meters in a mile
+
+        console.log("RADIUS " + radius);
 
         zoomLevel = 10;                     // 400px images covers ~ 25 miles 
         if (range == 10) zoomLevel = 11;    // 400px images covers ~ 12 miles
         if (range == 5) zoomLevel = 12      // 400px images covers ~ 6 miles
-    });
-
-    $("#location-button").on("click", function(event)
-    {   event.preventDefault();
 
         // Get data from the form and...
         // - retrieve a map from MapQuest
@@ -571,6 +585,8 @@ $(document).ready(function()
         {   searchZomato (41.5043, -81.6084);
         }
     });
+
+
 $(".searchAgain").on("click", function(){
     $(".main").show()
     $(".results").empty().hide()
