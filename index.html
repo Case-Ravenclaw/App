@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,46 +6,155 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Open+Sans:400,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+              href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+              integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+              crossorigin="anonymous">
+        <link href="style/style.css"
+              rel="stylesheet"
+              type="text/css">
 
     <title>Search for a place</title>
 
 
     <style>
+        body {
+            font-family: 'lato','open-sans','arial';
+        }
+        
+        h1 {
+            font-family: 'open-sans', 'arial';
+            font-weight: bold;
+            background-image: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2); /* For Chrome and Safari */
+            background-image:    -moz-linear-gradient(to right, #93EDC7, #1CD8D2); /* For old Fx (3.6 to 15) */
+            background-image:     -ms-linear-gradient(to right, #93EDC7, #1CD8D2); /* For pre-releases of IE 10*/
+            background-image:      -o-linear-gradient(to right, #93EDC7, #1CD8D2); /* For old Opera (11.1 to 12.0) */
+            background-image:         linear-gradient(to right, #93EDC7, #1CD8D2); /* Standard syntax; must be last */
+            color:transparent;
+            -webkit-background-clip: text;
+            background-clip: text;    
+        }
+        .heading{
+            margin: 0 auto;
+            text-align: center;
+        }
         .divider { 
             width:100%; 
             text-align:center; 
             border-bottom: 1px solid #000; 
-            line-height:0.1em; 
-            margin:60px 20px; 
+            line-height:0em; 
+            margin:80px 0px; 
             } 
-
         .divider span { 
             background:#fff; 
-            padding:0 10px; 
+            padding:0 15px; 
+            font-size: 25px;
+            }
+            /* .btn2 {
+                width: 40%;
+                display: block;
+                margin: 0 auto;
+            } */
+            .btn2 {
+            display: block;
+            margin: 0 auto;
+            height: 50px;
+            width: 186px;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            border: none;
+            background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+            cursor: pointer;
+            }
+            .btn2:hover{
+                transition: all 0.3s ease;
+                background: linear-gradient(45deg, #3bade3 0%, #576fe6 35%, #9844b7 71%, #ff357f 100%);
+            }
+            .btn2 span {
+            position: relative;
+            top: 16px;
+            }
+            .div-header{
+                background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+                font-size: 24px;
+            }
+            section {
+                padding: 50px 0;
+            }
+            section .section-title {
+                text-align: center;
+                color: #333;
+                margin-bottom: 50px;
+                text-transform: uppercase;
+            }
+            #footer {
+                background: #333;
+            }
+            #footer h5{
+                padding-left: 10px;
+                border-left: 3px solid #eeeeee;
+                padding-bottom: 6px;
+                margin-bottom: 20px;
+                color:#ffffff;
+            }
+            #footer a {
+                color: #ffffff;
+                text-decoration: none;
             }
     </style>
 </head>
 
 <body>
-    <div class="container main">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <h1 class="text-center pr-3">FourZato</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/Case-Ravenclaw">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main pt-3">
         <div class="search-container">
-            <h3>Search</h3>
-            <h5>Find a specific place</h5>
-            <form>
+            <div class="heading">
+                <h3><i class="fas fa-search-location"></i> Search</h3>
+                <h5>Find a specific place</h5>
+            </div>
+            <form class="col-12 px-0">
                 <div class="form-group">
-                    <label for="locationSearch">Query</label>
+                    <label for="locationSearch">Location</label>
                     <input type="text" class="form-control" id="query" placeholder="McDonalds">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-8 px-0 float-left">
                     <label for="locationSearch">Near</label>
                     <input type="text" class="form-control" id="locationSearch" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-4 pl-5 float-left selectdiv">
                     <label for="radiusSearch">Radius (miles)</label>
                     <select class="form-control" id="radiusSearch">
                         <option>1</option>
@@ -57,40 +165,42 @@
                     </select>
                 </div>
             </form>
-            <button id="submitSearch" type="submitSearch" class="btn btn-primary">Submit</button>
+            <button id="submitSearch" type="submitSearch" class="btn2 btn2-primary">Search <i class="fas fa-arrow-circle-right"></i></button>
         </div>
 
         <p class="divider"><span>OR</span></p>
 
         <div class="explore-container">
-            <h3>Explore Places Near Me</h3>
-            <h5>Look for places</h5>
-            <form>
-                <div class="form-group">
+            <div class="heading">
+                <h3><i class="fas fa-map-marked-alt"></i> Explore</h3>
+                <h5>Look for places near you</h5>
+            </div>
+            <form class="col-12 px-0">
+                <!-- <div class="form-group col-12 px-0">
                     <label for="locationExplore">Near</label>
                     <input type="email" class="form-control" id="locationExplore" placeholder="e.g. Chicago.. -OR- Leave blank to use your current location">
+                </div> -->
+                <div class="form-group float-left col-8 px-0">
+                        <label for="sectionExplore">Select Food</label>
+                        <select class="form-control" id="cuisines">
+                            <option data="-1">What are you in the mood for?</option>
+                            <option data="25">Chinese</option>
+                            <option data="40">Fastfood</option>
+                            <option data="233">Icecream</option>
+                            <option data="134">German</option>
+                            <option data="148">Indian</option>
+                            <option data="55">Italian</option>
+                            <option data="60">Japenese</option>
+                            <option data="70">Mediteranean</option>
+                            <option data="73">Mexican</option>
+                            <option data="82">Pizza</option>
+                            <option data="83">Seafood</option>
+                            <option data="966">Southwestern</option>
+                            <option data="89">Steak</option>
+                            <option data="99">Vegetarian</option>
+                        </select>
                 </div>
-                <div class="form-group">
-                    <label for="sectionExplore">Food Type</label>
-                    <select class="form-control" id="cuisines">
-                        <option data=""> What are you in the mood for?</option>
-                        <option data="25"> Chinese</option>
-                        <option data="40">Fastfood</option>
-                        <option data="233">Icecream</option>
-                        <option data="134">German</option>
-                        <option data="148">Indian</option>
-                        <option data="55">Italian</option>
-                        <option data="60">Japenese</option>
-                        <option data="70">Mediteranean</option>
-                        <option data="73">Mexican</option>
-                        <option data="82">Pizza</option>
-                        <option data="83">Seafood</option>
-                        <option data="966">Southwestern</option>
-                        <option data="89">Steak</option>
-                        <option data="99">Vegetarian</option>
-                    </select>
-                </div>
-                <div class="form-group">
+                <div class="form-group float-left col-4 pl-5 selectdiv">
                     <label for="radiusExplore">Radius (miles)</label>
                     <select class="form-control" id="radiusExplore">
                         <option>1</option>
@@ -100,24 +210,131 @@
                         <option>20</option>
                     </select>
                 </div>
-                <div class="form-check">
+                <!-- <div class="form-check" style="clear: both;">
                     <input class="form-check-input" type="checkbox" value="" id="openExplore">
                     <label class="form-check-label" for="openExplore">
                         Open Now
                     </label>
-                </div>
+                </div> -->
             </form>
             <br>
-            <button id="submitExplore" type="submitExplore" class="btn btn-primary">Submit</button>
+            <button id="submitExplore" type="submitExplore" class="btn2 btn2-primary mb-5">Explore <i class="fas fa-arrow-circle-right"></i></button>
         </div>
     </div>
 
     <div class="container results">
+        <span class="searchAgain">
+        <button id="searchAgain" type="searchAgain" class="btn2 btn2-primary mb-5">Search Again? <i class="fas fa-arrow-circle-right"></i></button>
+    </span>
     </div>
+
+    
+
+        <!-- <div class="wrapper"> -->
+            <!-- <header>Foodie</header> -->
+
+            <!-- <main id="main-content">
+                <section class="map-section">
+                    <div class="input-div">
+                        <div class="div-header" value="form">Your Location</div>
+                        <form> -->
+                            <!-- <input id="foursquare"
+                                   name="foursquare"
+                                   type="checkbox"> Use foursquare
+                            <br> -->
+                            <!-- <label for="input-city">City:</label>
+                            <input class="text-input"
+                                   id="input-city"
+                                   name="input-city"
+                                   placeholder="Your city or town"
+                                   type="text">
+                            <label for="input-state">State:</label>
+                            <input class="text-input"
+                                   id="input-state"
+                                   name="input-state"
+                                   placeholder="XX"
+                                   type="text"> -->
+
+                                   <!-- <div class="form-group">
+                                        <label for="sectionExplore">Select Food</label>
+                                        <select class="form-control" id="cuisines">
+                                            <option data="-1">What are you in the mood for?</option>
+                                            <option data="25">Chinese</option>
+                                            <option data="40">Fastfood</option>
+                                            <option data="233">Icecream</option>
+                                            <option data="134">German</option>
+                                            <option data="148">Indian</option>
+                                            <option data="55">Italian</option>
+                                            <option data="60">Japenese</option>
+                                            <option data="70">Mediteranean</option>
+                                            <option data="73">Mexican</option>
+                                            <option data="82">Pizza</option>
+                                            <option data="83">Seafood</option>
+                                            <option data="966">Southwestern</option>
+                                            <option data="89">Steak</option>
+                                            <option data="99">Vegetarian</option>
+                                        </select>
+                                    </div> -->
+
+                            <!-- <label for="input-radius">Radius</label><br>
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=5>5 miles
+                            <br>
+                                   
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=10>10 miles
+                            <br>
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=15>15 miles
+                            <br>
+                            <input class="radio-input"
+                                   id="input-radius"
+                                   name="input-radius"
+                                   type="radio"
+                                   value=20>20 miles
+                            <br>
+                            <button class="button" id="location-button" type="button" value="submit">SUBMIT</button>
+                        </form>
+                    </div> -->
+
+                    <!-- <div class="map">
+                        <img id="map" src="http://placehold.it/400x300">
+                    </div>
+                </section> -->
+
+                <section class="foodie-section">
+                </section>
+            <!-- </main> -->
+
+        <!-- </div> -->
+
+        <!-- Footer -->
+    <section class="" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center text-white">
+                    <p class="h6">&copy All right Reserved.<a class="text-green ml-2" href="https://github.com/Case-Ravenclaw"
+                            target="_blank"><i class="fab fa-github"></i> Ravenclaw</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ./Footer -->
 
 
 
     <script type="text/javascript" src="assets/js/app.js"></script>
+    <script language="JavaScript" src="scripts/page.js">
+</script>
 </body>
 
 </html>
