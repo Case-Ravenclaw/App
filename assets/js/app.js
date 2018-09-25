@@ -20,9 +20,12 @@ var getSearch = function (queryURL) {
         })
         .then(function (response) {
             if (response.response.venues.length) {
-                for (var i = 0; i < response.response.venues.length; i++) {
-                    venueIDs.push(response.response.venues[i].id)
-                }
+                // for (var i = 0; i < response.response.venues.length; i++) {
+                //     venueIDs.push(response.response.venues[i].id)
+                // }
+                _.each(response.response.venues, function(item){
+                    venueIDs.push(item.id)
+                })
                 idSearch()
             } else {
                 console.log("No Results!")
@@ -208,14 +211,15 @@ function formatAddress(address) { // The address received from Zomato is a comma
     var rString = "";
     var aLength = addr.length;
     var aCount = 0;
-    for (var i = 0; i < aLength; i++) {
-        rString = rString + addr[i];
+    _.each(addr,  function(item){
+        rString = rString + item;
 
         if (aCount < (aLength - 1)) {
             rString = rString + "<br>";
             aCount++;
         }
-    };
+    })
+    
 
     return rString;
 }
@@ -329,9 +333,13 @@ function getZomato(name, latitude, longitude, number) { // get data from Zomato 
             },
         })
         .then(function (response) {
-            response.restaurants.forEach(function (data) {
-                displayZomato(data, name, number)
-            });
+            // response.restaurants.forEach(function (data) {
+            //     displayZomato(data, name, number)
+            // });
+
+            _.each(response.restaurants, function (data) {
+                displayZomato(data, name, number);
+            })
         })
         .catch(function (e) {
             console.log(e);
