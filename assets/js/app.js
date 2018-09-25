@@ -1,8 +1,8 @@
 //Foursquare SEARCH endpoint
-var client_id = 'FZ5OBOFAZHYVQ0H2MKNGOZCEWDRVIVHLXQS31LD4IU2OML4I';
+var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
 //var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
 
-var client_secret = 'ZY1UQBPUXBN5P3VCIKVHGQEFNJLOXFQRCR5FPCSLPNCUSYIJ';
+var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
 //var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
 
 var near = ''
@@ -42,6 +42,11 @@ var idSearch = function () {
             })
             .then(function (response) {
                 //create results div
+
+                console.log(queryURL)
+
+                console.log(response.response.venue)
+
                 var $resultDiv = $("<div>").addClass('result zomato-site')
 
                 var $nameP = $("<div>").text(response.response.venue.name).addClass("div-header")
@@ -74,8 +79,12 @@ var idSearch = function () {
                 var $linkA = $("<a>").text("View Website").attr("href", response.response.venue.page.pageInfo.links.items[0].url).addClass("link")
 
                 var $resTxt = $("<div>").addClass("div-text")
+                var $headTxt = $("<div>").addClass("div-header")
 
-                $resultDiv.append($nameP + " - " + $addressP)
+                $resultDiv.append($headTxt)
+
+                $headTxt.append($nameP)
+                $headTxt.append($addressP)
 
                 $resultDiv.append($resTxt)
 
