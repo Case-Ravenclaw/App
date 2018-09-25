@@ -39,11 +39,12 @@ header
     padding: 0px;
 }
 
-.div-header
+/* .div-header
 {   background: var(--head-bg-color);
     color: var(--head-text);
     padding: 10px;
-}
+
+} */
 
 .div-text
 {   padding: 10px;
