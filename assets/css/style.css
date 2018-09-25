@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'lato', 'open-sans', 'arial';
 }
@@ -34,11 +38,6 @@ h1 {
     font-size: 25px;
 }
 
-/* .btn2 {
-                width: 40%;
-                display: block;
-                margin: 0 auto;
-            } */
 .btn2 {
     display: block;
     margin: 0 auto;
@@ -63,6 +62,10 @@ h1 {
 .btn2 span {
     position: relative;
     top: 16px;
+}
+
+#searchAgainB{
+    margin-top: 40px;
 }
 
 .div-header {
@@ -100,27 +103,6 @@ section .section-title {
     text-decoration: none;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    /* --div-brd-color: blue; */
-    --div-brd-radius: 2px;
-    --head-bg-color: blue;
-    --head-brd-color: darkblue;
-    --head-text: white;
-}
-
-/* header
-{   background: var(--head-bg-color);
-    border: 2px solid var(--head-brd-color);
-    border-radius: 5px;
-    color: var(--head-text);
-    font-size: 36px;
-    padding: 20px;
-    text-align: center;
-} */
 #main-content {
     display: flex;
     flex-wrap: wrap;

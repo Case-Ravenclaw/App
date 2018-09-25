@@ -11,7 +11,7 @@ var userRadiusM = userRadiusMi / 0.00062137
 var version = 20180918
 var query = ''
 var venueIDs = []
-$(".searchAgain").hide()
+$("#searchAgainB").hide()
 
 var getSearch = function (queryURL) {
     $.ajax({
@@ -121,8 +121,8 @@ function getCurrentLocation() {
 
 $("#submitSearch").on("click", function () {
     venueIDs = []
+    $("#searchAgainB").show()
     $(".main").hide()
-    $(".searchAgain").show()
     if (!$("#locationSearch").val()) {
         getCurrentLocation()
     } else if ($("#locationSearch").val()) {
@@ -137,28 +137,6 @@ $("#submitSearch").on("click", function () {
         console.log("Broken")
     }
 })
-
-
-
-//Foursquare EXPLORE endpoint 
-// var radius = "1000"
-// var section = "food"
-// var city = "Willoughby,OH"
-// var fs_id = "HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0"
-// var fs_secret = "OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y"
-// var v = "20180918"
-// var open = "1"
-// var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + fs_id + "&client_secret=" + fs_secret + "&near=" + city + "&limit=10&section=" + section + "&radius=" + radius + "&v=" + v + "&openNow=" + open
-
-// $("#submitExplore").on("click", function () {
-//     $.ajax({
-//         url: queryURL,
-//         method: "GET"
-//     }).then(function (response) {
-//         var results = response.response.groups
-//         console.log(results)
-//     })
-// })
 
 
 
@@ -523,8 +501,8 @@ $(document).ready(function () {
 
     $("#submitExplore").on("click", function (event) {
         event.preventDefault();
-        $(".searchAgain").show()
-
+        $("#searchAgainB").show()
+        $(".main").hide()
 
         var range = $("#radiusExplore").val()
 
@@ -564,11 +542,10 @@ $(document).ready(function () {
             searchZomato(41.5043, -81.6084);
         }
     });
+})
 
-
-    $(".searchAgain").on("click", function () {
-        $(".main").show()
-        $(".results").empty().hide()
-        $(".searchAgain").hide()
-    })
+$(".searchAgain").on("click", function () {
+    $(".main").show()
+    $(".results").find('*').not(".searchAgain").not("#searchAgainB").remove();
+    $("#searchAgainB").hide()
 })
