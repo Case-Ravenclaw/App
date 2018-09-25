@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'lato', 'open-sans', 'arial';
+}
+
+h1 {
+    font-family: 'open-sans', 'arial'!important;
+    font-weight: bold;
+    background-image: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2)!important; 
+    background-image:    -moz-linear-gradient(to right, #93EDC7, #1CD8D2)!important;
+    background-image:     -ms-linear-gradient(to right, #93EDC7, #1CD8D2)!important; 
+    background-image:      -o-linear-gradient(to right, #93EDC7, #1CD8D2)!important; 
+    background-image:         linear-gradient(to right, #93EDC7, #1CD8D2)v;
+    color:transparent!important;
+    -webkit-background-clip: text!important;
+    background-clip: text!important;    
+}
+
+.heading {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.divider {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0em;
+    margin: 80px 0px;
+}
+
+.divider span {
+    background: #fff;
+    padding: 0 15px;
+    font-size: 25px;
+}
+
+.btn2 {
+    display: block;
+    margin: 0 auto;
+    height: 50px;
+    width: 186px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+    cursor: pointer;
+}
+
+.btn2:hover {
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #3bade3 0%, #576fe6 35%, #9844b7 71%, #ff357f 100%);
+}
+
+.btn2 span {
+    position: relative;
+    top: 16px;
+}
+
+#searchAgainB{
+    margin-top: 40px;
+}
+
+.div-header {
+    background: linear-gradient(45deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
+    font-size: 24px;
+    color: white;
+    padding: 10px
+}
+
+section {
+    padding: 50px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#footer {
+    background: #333;
+}
+
+#footer h5 {
+    padding-left: 10px;
+    border-left: 3px solid #eeeeee;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+#footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.foodie-section,
+.map-section {
+    min-width: 400px;
+    padding: 10px;
+    width: 48%;
+}
+
+.zomato-site {
+    border: 1px solid var(--head-bg-color);
+    border-radius: var(--div-brd-radius);
+    margin-bottom: 60px;
+    padding: 0px;
+}
+
+/* .div-header
+{   
+    background: var(--head-bg-color);
+
+} */
+
+.div-text {
+    padding: 10px;
+}
+
+.button {
+    background: var(--head-bg-color);
+    border: 1px solid var(--head-brd-color);
+    border-radius: 2px;
+    color: var(--head-text);
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.button:hover {
+    background: var(--head-text);
+    color: var(--head-bg-color);
+}
+
+/*                                  */
+/* style for input form             */
+/*                                  */
+
+.input-div {
+    border: 1px solid var(--head-bg-color);
+    border-radius: var(--div-brd-radius);
+    margin-bottom: 10px;
+}
+
+form {
+    padding: 10px;
+}
+
+.text-input {
+    width: 100%;
+}
+
+/*                                  */
+/* miscellaneous style              */
+/*                                  */
+
+.map {
+    display: flex;
+    justify-content: center;
+}
+
+/*                                  */
+/* style for sticky footer          */
+/*                                  */
+
+body,
+html {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper {
+    height: auto;
+    margin-bottom: -30px;
+    padding: 10px;
+    min-height: 100%;
+}
+
+
+
+
+@media screen and (max-width: 840px) {
+
+    .foodie-section,
+    .map-section {
+        width: 100%;
+    }
+}
