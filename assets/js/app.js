@@ -338,7 +338,7 @@ function makeZomato (number)
         .addClass("zomato-site")    
         .attr("value", number);
 
-    $(".foodie-section").append(zomatoDiv);
+    $(".results").append(zomatoDiv);
 }
 
 function getZomato (name, latitude, longitude, number)
@@ -546,6 +546,8 @@ $(document).ready(function()
 
     $("#submitExplore").on("click", function(event)
     {   event.preventDefault();
+        $(".searchAgain").show()
+
 
         var range =  $("#radiusExplore").val()
 
