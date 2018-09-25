@@ -39,14 +39,15 @@ var idSearch = function () {
             })
             .then(function (response) {
                 //create results div
-                var $resultDiv = $("<div>").addClass('result')
+                var $resultDiv = $("<div>").addClass('result zomato-site')
 
-                var $nameP = $("<p>").text(response.response.venue.name).addClass("name")
+                var $nameP = $("<div>").text(response.response.venue.name).addClass("div-header")
                 var $addressP = $("<p>").text(response.response.venue.location.address).addClass("address")
                 var $categoryP = $("<p>").text(response.response.venue.categories.name).addClass("category")
 
                 //change the rating to be out of 5
-                var rating = Math.floor(response.response.venue.rating / 2)
+                var rNum = response.response.venue.rating / 2
+                var rating = (Math.round(rNum * 10) / 10).toFixed(1)
                 var $ratingP = $("<p>").text(rating).addClass("rating")
 
                 //adding dollar signs for price tiers
@@ -61,7 +62,7 @@ var idSearch = function () {
                 if (response.response.venue.hours.isOpen === true) {
                     openString = "Open now!"
                 } else if (response.response.venue.hours.isOpen === false) {
-                    openString = "This is not open right now"
+                    openString = "Closed right now"
                 } else {
                     openString = "We don't have data on this"
                 }
@@ -69,13 +70,18 @@ var idSearch = function () {
 
                 var $linkA = $("<a>").text("View Website").attr("href", response.response.venue.page.pageInfo.links.items[0].url).addClass("link")
 
-                $resultDiv.append($nameP)
-                $resultDiv.append($addressP)
-                $resultDiv.append($categoryP)
-                $resultDiv.append($ratingP)
-                $resultDiv.append($pricesP)
-                $resultDiv.append($hoursP)
-                $resultDiv.append($linkA)
+                var $resTxt = $("<div>").addClass("div-text")
+
+                $resultDiv.append($nameP + " - " + $addressP)
+
+                $resultDiv.append($resTxt)
+
+                $resTxt.append($categoryP)
+                $resTxt.append(makeStars(rating))
+                $resTxt.append($ratingP)
+                $resTxt.append($pricesP)
+                $resTxt.append($hoursP)
+                $resTxt.append($linkA)
 
                 $(".results").append($resultDiv)
             })
@@ -156,52 +162,47 @@ $("#submitSearch").on("click", function () {
 
 
 
-var radius = 10000;                     // the search radius, in meters
-var zoomLevel = 15;                     // The default zoom level for OpenMapQuest static map search
-                                        // a 400px image covers ~25 miles
+var radius = 10000; // the search radius, in meters
+var zoomLevel = 15; // The default zoom level for OpenMapQuest static map search
+// a 400px image covers ~25 miles
 
-function getMap(locations)
-{   // Request a static map for the area from OpenMapQuest
+function getMap(locations) { // Request a static map for the area from OpenMapQuest
 
-    if (typeof locations != "object")
-    {   alert ("getMap() invalid parameter\n" + typeof locations);
+    if (typeof locations != "object") {
+        alert("getMap() invalid parameter\n" + typeof locations);
         return false;
     }
 
     var OpenMQKey = "4DAFdAxvqtX0oTrlvDv5Z1sKAvOVd2Rt";
-    
+
     // Build the search URL
 
     // Start with the URL and API key
     var URL = "https://open.mapquestapi.com/staticmap/v5/map?key=" + OpenMQKey;
 
     // Add the center of the map
-    if (locations[0][0])
-    {   // This as a two dimentional array.  The first element is the center of the map}
+    if (locations[0][0]) { // This as a two dimentional array.  The first element is the center of the map}
         // The first element of locations[] is the center of the map
         URL = URL + "&center=" + locations[0][0] + "," + locations[0][1];
-            
+
         // Add points of interest
         var lLength = locations.length;
 
-        if (lLength > 1)
-        {
+        if (lLength > 1) {
             // the rest of the elements in the array are latitude and longitude for markers
 
             // select the marker style and begin the locations parameter
             URL = URL + "&defaultMarker=marker-num&locations="
 
-            for (var i=1; i<lLength; i++)
-            {   URL = URL + locations[i][0] + "," + locations[i][1];
+            for (var i = 1; i < lLength; i++) {
+                URL = URL + locations[i][0] + "," + locations[i][1];
 
                 // double pipe "||" to separate the coordinates of multiple markers
                 if ((i + 1) < lLength)
                     URL = URL + "||";
             }
         }
-    }
-    else
-    {   // Only one element in the array...its the center of the map.  There are no points of
+    } else { // Only one element in the array...its the center of the map.  There are no points of
         // interest
         URL = URL + "&center=" + locations[0] + "," + locations[1];
     }
@@ -210,21 +211,18 @@ function getMap(locations)
     URL = URL + "&type=sat&zoom=" + zoomLevel + "&size=400,300";
 
     $.get(URL)
-    .then (function ()
-    {
-        $("#map").attr("src", this.url);
-    })
-    .catch (function()
-    {   // the search request falied
-        alert (URL);
-        return false;
-    });
+        .then(function () {
+            $("#map").attr("src", this.url);
+        })
+        .catch(function () { // the search request falied
+            alert(URL);
+            return false;
+        });
 
     return true;
 }
 
-function formatAddress(address)
-{   // The address received from Zomato is a comma-delimited string.  Reformat that string to a friendlier,
+function formatAddress(address) { // The address received from Zomato is a comma-delimited string.  Reformat that string to a friendlier,
     // more familiar format
 
     var addr = address.split(",");
@@ -232,11 +230,11 @@ function formatAddress(address)
     var rString = "";
     var aLength = addr.length;
     var aCount = 0;
-    for (var i=0; i<aLength; i++)
-    {   rString = rString + addr[i];
+    for (var i = 0; i < aLength; i++) {
+        rString = rString + addr[i];
 
-        if (aCount < (aLength - 1))
-        {   rString = rString + "<br>";
+        if (aCount < (aLength - 1)) {
+            rString = rString + "<br>";
             aCount++;
         }
     };
@@ -244,8 +242,7 @@ function formatAddress(address)
     return rString;
 }
 
-function makeStars (numStars)
-{   // Create a row of five stars to graphically represent the avaerage rating assigned by customers
+function makeStars(numStars) { // Create a row of five stars to graphically represent the avaerage rating assigned by customers
     //
     // I'm using Font Awesome icons for outlined and solid stars.  The class used to identify a hollow
     // star is "far fa-star" and a solid star is "fas fa-star".  A half-star is "fas fa-star-half-alt".
@@ -253,43 +250,39 @@ function makeStars (numStars)
     // First create a <div> element to hold the sars 
 
     var starBar = $("<div>");
-    starBar.addClass ("star-div");
+    starBar.addClass("star-div");
 
     // Next, create five <i> elements to represent the star rating.  Font Awesome recommends using the
     // <i> tag to include their icons in HTML.
 
-    for (var i=1; i<6; i++)   
-    {   var iTag = $("<i>");
+    for (var i = 1; i < 6; i++) {
+        var iTag = $("<i>");
 
-        if (i <= numStars)
-        {   iTag.addClass("fas fa-star");
-        }
-        else
-        if ((i - numStars) < 1)
-        {   // If numStars is not a round number (it will happen far more often than not), there will be
+        if (i <= numStars) {
+            iTag.addClass("fas fa-star");
+        } else
+        if ((i - numStars) < 1) { // If numStars is not a round number (it will happen far more often than not), there will be
             // one iteration of the loop where i is neither less than numStars nor greater than numStars.
             // Add a half star to the row...
 
             iTag.addClass("fas fa-star-half-alt");
-        }
-        else
-        {   iTag.addClass("far fa-star");
+        } else {
+            iTag.addClass("far fa-star");
         }
 
-        starBar.append (iTag);
+        starBar.append(iTag);
     }
 
     return starBar;
 }
 
 // function displayZomato (data, name)
-function displayZomato (data, name, number)
-{   // get data from Zomato for the establishment at the specified latitude and longitude
-console.log("********************");
-console.log("displayZomato()");
-    
+function displayZomato(data, name, number) { // get data from Zomato for the establishment at the specified latitude and longitude
+    console.log("********************");
+    console.log("displayZomato()");
+
     var zomatoDiv = $(".zomato-site[value='" + number + "']");
-console.log(zomatoDiv);
+    console.log(zomatoDiv);
     var headDiv = $("<div>");
     var textDiv = $("<div>");
 
@@ -301,10 +294,10 @@ console.log(zomatoDiv);
     var p6 = $("<p>");
 
     headDiv = $("<div>");
-        
+
     headDiv
         .addClass("div-header")
-        .text(data.restaurant.name );
+        .text(data.restaurant.name);
 
     p1.html(formatAddress(data.restaurant.location.address));
     p3.text(data.restaurant.cuisines);
@@ -314,20 +307,19 @@ console.log(zomatoDiv);
 
     textDiv
         .addClass("div-text")
-        .append (p1)
-        .append (p3)
-        .append (p4)
-        .append (makeStars (data.restaurant.user_rating.aggregate_rating))
-        .append (p5)
-        .append (p6);
+        .append(p1)
+        .append(p3)
+        .append(p4)
+        .append(makeStars(data.restaurant.user_rating.aggregate_rating))
+        .append(p5)
+        .append(p6);
 
     zomatoDiv
         .append(headDiv)
         .append(textDiv);
 }
 
-function makeZomato (number)
-{   // The Zomato API call is asynchronous and the order those API calls complete and are returned
+function makeZomato(number) { // The Zomato API call is asynchronous and the order those API calls complete and are returned
     // cannot be determined by synchronous code...I can't submit the search and add a marker to the
     // map in a simple loop.  displayZomato() can't make the <div> elements to display the data for
     // each restaurant.  But I can make a <div> element ahead of time and put nothing in it except an
@@ -335,201 +327,186 @@ function makeZomato (number)
 
     var zomatoDiv = $("<div>");
     zomatoDiv
-        .addClass("zomato-site")    
+        .addClass("zomato-site")
         .attr("value", number);
 
     $(".results").append(zomatoDiv);
 }
 
-function getZomato (name, latitude, longitude, number)
-{   // get data from Zomato for the establishment at the specified latitude and longitude
-console.log("********************");
-console.log("getZomato()");
-    
-//     var queryURL = "https://developers.zomato.com/api/v2.1/search?q=Luna Cleveland&radius=1&count=1"
-    var queryURL = "https://developers.zomato.com/api/v2.1/search?count=1&q=" + name +
-                   "&lat=" + latitude +
-                   "&lon=" + longitude + 
-                   "&radius=1000";
+function getZomato(name, latitude, longitude, number) { // get data from Zomato for the establishment at the specified latitude and longitude
+    console.log("********************");
+    console.log("getZomato()");
 
-    $.ajax(
-    {   url: queryURL,
-        method: "GET",
-        beforeSend: function(xhr)
-        {   xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
-        },
-    })
-    .then(function(response)
-    {
-        response.restaurants.forEach (function(data)
-        {   
-            displayZomato (data, name, number)
+    //     var queryURL = "https://developers.zomato.com/api/v2.1/search?q=Luna Cleveland&radius=1&count=1"
+    var queryURL = "https://developers.zomato.com/api/v2.1/search?count=1&q=" + name +
+        "&lat=" + latitude +
+        "&lon=" + longitude +
+        "&radius=1000";
+
+    $.ajax({
+            url: queryURL,
+            method: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
+            },
+        })
+        .then(function (response) {
+            response.restaurants.forEach(function (data) {
+                displayZomato(data, name, number)
+            });
+        })
+        .catch(function (e) {
+            console.log(e);
         });
-    })
-    .catch(function(e)
-    { console.log(e);
-    });
 }
 
 // get data from Zomato for the establishment at the specified latitude and longitude
-function searchZomato (latitude, longitude){   
+function searchZomato(latitude, longitude) {
 
     var cuisineId = $("#cuisines").find(':selected').attr("data");
     console.log(cuisineId);
-    
-    console.log("Search Zomato " , radius);
+
+    console.log("Search Zomato ", radius);
     var queryURL = "https://developers.zomato.com/api/v2.1/search?count=5&&lat=" + latitude +
-                   "&lon=" + longitude + 
-                   "&radius=" + radius +
-                   "&cuisines=" + cuisineId;
+        "&lon=" + longitude +
+        "&radius=" + radius +
+        "&cuisines=" + cuisineId;
 
-    $.ajax(
-    {   url: queryURL,
-        method: "GET",
-        beforeSend: function(xhr)
-        {   xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
-        },
-    })
-    .then(function(response)
-    {
-        var map = [];
+    $.ajax({
+            url: queryURL,
+            method: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('user-key', '71908c4a0942db243aa61de4a0bff5f2');
+            },
+        })
+        .then(function (response) {
+            var map = [];
 
-// the first element is the center of the map
-// While testing, use the coordinates of the first item in FourSquare response as the center of the
-// map
-        map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
+            // the first element is the center of the map
+            // While testing, use the coordinates of the first item in FourSquare response as the center of the
+            // map
+            map.push([response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude]);
 
-        var count = 1;
-        response.restaurants.forEach (function(data)
-        {   
-            makeZomato (count);
-     
-            displayZomato (data, name, count++)
+            var count = 1;
+            response.restaurants.forEach(function (data) {
+                makeZomato(count);
 
-            map.push([ data.restaurant.location.latitude,  data.restaurant.location.longitude]);
+                displayZomato(data, name, count++)
+
+                map.push([data.restaurant.location.latitude, data.restaurant.location.longitude]);
+            });
+
+            getMap(map);
+        })
+        .catch(function (e) {
+            console.log(e);
         });
-
-        getMap (map);
-    })
-    .catch(function(e)
-    { console.log(e);
-    });
 }
 
-function getFourSquare(lat, lng)
-{   
+function getFourSquare(lat, lng) {
 
 
-console.log("********************");
-console.log("getFourSquare()");
-console.log(lat);
+    console.log("********************");
+    console.log("getFourSquare()");
+    console.log(lat);
     var client_id = 'HU31LS5FUBEXJMWI5FTBJFRGKDPGDGGJBSMV2A14CEP5YOO0';
     var client_secret = 'OYOQDBMT2Q50B3HQNQXO0KXNMV2GR25DF05HUCWFFX3JEO2Y';
-    
-    var latLon = "";
-// Northfield
-//     lat = 41.3451;
-//     lng = -81.5285;
-// Case Western Reserve University
-//     lat = 41.5043;
-//     lng = -81.6084;
-//     latLon = lat.toString() + "," + lng.toString();
-// 
-//     if (!lat || !lng)
-//     {   
-//         // Can use Latitude Longitude or Near One is requireed
-//         // var latLon = "41.08,-81.51"
-//         // var near = "Akron"
-// 
-//         alert ("Error");
-//         return;
-//     }
-var version = 20180918
-var queryURL = "";
 
-    if (lat)
-    {   
-        if (lng)
-        {
+    var latLon = "";
+    // Northfield
+    //     lat = 41.3451;
+    //     lng = -81.5285;
+    // Case Western Reserve University
+    //     lat = 41.5043;
+    //     lng = -81.6084;
+    //     latLon = lat.toString() + "," + lng.toString();
+    // 
+    //     if (!lat || !lng)
+    //     {   
+    //         // Can use Latitude Longitude or Near One is requireed
+    //         // var latLon = "41.08,-81.51"
+    //         // var near = "Akron"
+    // 
+    //         alert ("Error");
+    //         return;
+    //     }
+    var version = 20180918
+    var queryURL = "";
+
+    if (lat) {
+        if (lng) {
             // Can use Latitude Longitude or Near One is requireed
             // var latLon = "41.08,-81.51"
             // var near = "Akron"
 
-            queryURL = "https://api.foursquare.com/v2/venues/explore?client_id="+ client_id +
-            "&client_secret=" + client_secret +
-            "&ll=" + lat.toString() + "," + lng.toString() +
-            "&v=" + version +
-            "&section=food&radius="+radius +
-            "&limit=5";
+            queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + client_id +
+                "&client_secret=" + client_secret +
+                "&ll=" + lat.toString() + "," + lng.toString() +
+                "&v=" + version +
+                "&section=food&radius=" + radius +
+                "&limit=5";
+        } else {
+            queryURL = "https://api.foursquare.com/v2/venues/explore?client_id=" + client_id +
+                "&client_secret=" + client_secret +
+                "&near=" + lat +
+                "&v=" + version +
+                "&section=food&radius=" + radius +
+                "&limit=5";
         }
-        else
-        {   
-            queryURL = "https://api.foursquare.com/v2/venues/explore?client_id="+ client_id +
-            "&client_secret=" + client_secret +
-            "&near=" + lat +
-            "&v=" + version +
-            "&section=food&radius="+radius +
-            "&limit=5";
-        }
-    }
-    else
-    {
-        alert ("Error");
+    } else {
+        alert("Error");
         return;
     }
-        
+
     var intent = "browse"
     // var radius = 1000
-//     var version = 20180918
+    //     var version = 20180918
 
-//     var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id="+ client_id +
-//                    "&client_secret=" + client_secret +
-//                    "&ll=" + latLon +
-//                    "&v=" + version +
-//                    "&section=food&radius="+radius +
-//                    "&limit=5";
-        
-    $.ajax(
-    {   url: queryURL,
-        method: "GET"
-    })
-    .then(function(response)
-    {
-        
-        // create an array for getMap()
-        var map = [];
+    //     var queryURL = "https://api.foursquare.com/v2/venues/explore?client_id="+ client_id +
+    //                    "&client_secret=" + client_secret +
+    //                    "&ll=" + latLon +
+    //                    "&v=" + version +
+    //                    "&section=food&radius="+radius +
+    //                    "&limit=5";
 
-        // the first element is the center of the map
-// While testing, use the coordinates of the first item in FourSquare response as the center of the
-// map
-        map.push([response.response.groups[0].items[0].venue.location.lat, response.response.groups[0].items[0].venue.location.lng]);
-
-        var count = 1; 
-        response.response.groups[0].items.forEach(function(data)
-        {
-            console.log("location: ", data.venue.location.lat, " ", data.venue.location.lng)
-            // Send these coordinates to the Zomato function
-
-            makeZomato (count);
-        
-            getZomato (data.venue.name, data.venue.location.lat,  data.venue.location.lng, count++);
-
-            // and pust them into the array for getMaps()
-            map.push([ data.venue.location.lat,  data.venue.location.lng]);
-
+    $.ajax({
+            url: queryURL,
+            method: "GET"
         })
+        .then(function (response) {
 
-        getMap (map);
-    });
+            // create an array for getMap()
+            var map = [];
+
+            // the first element is the center of the map
+            // While testing, use the coordinates of the first item in FourSquare response as the center of the
+            // map
+            map.push([response.response.groups[0].items[0].venue.location.lat, response.response.groups[0].items[0].venue.location.lng]);
+
+            var count = 1;
+            response.response.groups[0].items.forEach(function (data) {
+                console.log("location: ", data.venue.location.lat, " ", data.venue.location.lng)
+                // Send these coordinates to the Zomato function
+
+                makeZomato(count);
+
+                getZomato(data.venue.name, data.venue.location.lat, data.venue.location.lng, count++);
+
+                // and pust them into the array for getMaps()
+                map.push([data.venue.location.lat, data.venue.location.lng]);
+
+            })
+
+            getMap(map);
+        });
 }
 
-$(document).ready(function()
-{   
-//
-//
+$(document).ready(function () {
+    //
+    //
 
-//     getFourSquare("Cleveland");
-    getMap ([41.4993, -81.6944]);
+    //     getFourSquare("Cleveland");
+    getMap([41.4993, -81.6944]);
 
     // $(".radio-input").on("change", function()
     // {   // event handler for the range radio button
@@ -544,21 +521,21 @@ $(document).ready(function()
     //     if (range == 5) zoomLevel = 12      // 400px images covers ~ 6 miles
     // });
 
-    $("#submitExplore").on("click", function(event)
-    {   event.preventDefault();
+    $("#submitExplore").on("click", function (event) {
+        event.preventDefault();
         $(".searchAgain").show()
 
 
-        var range =  $("#radiusExplore").val()
+        var range = $("#radiusExplore").val()
 
         console.log("RANGE " + range);
-        radius = 1609 * range;              // there are 1609 meters in a mile
+        radius = 1609 * range; // there are 1609 meters in a mile
 
         console.log("RADIUS " + radius);
 
-        zoomLevel = 10;                     // 400px images covers ~ 25 miles 
-        if (range == 10) zoomLevel = 11;    // 400px images covers ~ 12 miles
-        if (range == 5) zoomLevel = 12      // 400px images covers ~ 6 miles
+        zoomLevel = 10; // 400px images covers ~ 25 miles 
+        if (range == 10) zoomLevel = 11; // 400px images covers ~ 12 miles
+        if (range == 5) zoomLevel = 12 // 400px images covers ~ 6 miles
 
         // Get data from the form and...
         // - retrieve a map from MapQuest
@@ -576,22 +553,22 @@ $(document).ready(function()
         // The remaining elements represent multiple points of interest.  These must be latitde and
         // longitude.
 
-        if ($("#foursquare:checked").length)
-        {   if ($("#input-city").val() != "")
-                getFourSquare ($("#input-city").val().trim())
+        if ($("#foursquare:checked").length) {
+            if ($("#input-city").val() != "")
+                getFourSquare($("#input-city").val().trim())
             else
-                getFourSquare (41.5043, -81.6084)
-        }
-        else
-            
-        {   searchZomato (41.5043, -81.6084);
+                getFourSquare(41.5043, -81.6084)
+        } else
+
+        {
+            searchZomato(41.5043, -81.6084);
         }
     });
 
 
-$(".searchAgain").on("click", function(){
-    $(".main").show()
-    $(".results").empty().hide()
-    $(".searchAgain").hide()
-})
+    $(".searchAgain").on("click", function () {
+        $(".main").show()
+        $(".results").empty().hide()
+        $(".searchAgain").hide()
+    })
 })
