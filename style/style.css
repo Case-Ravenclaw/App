@@ -27,15 +27,15 @@ header
 }
 
 .foodie-section, .map-section
-{   min-width: 400px;
+{   max-width: 800px;
     padding: 10px;
-    width: 48%;
+    margin: 0 auto;
 }
 
 .zomato-site
 {   border: 1px solid var(--head-bg-color);
     border-radius: var(--div-brd-radius);
-    margin-bottom: 10px;
+    margin-bottom: 60px;
     padding: 0px;
 }
 
